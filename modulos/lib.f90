@@ -49,4 +49,89 @@ contains
 
   end function
 
+
+  function f1(x)
+
+    ! f1 es la función a integrar por el método del trapecio en la subrutina trapecio
+
+    implicit none
+
+    real(8), intent(in) :: x
+    real(8) :: f1
+
+    f1 = gaussNormal(x)
+
+  end function
+
+  subroutine trapecio(a,b,c,n)
+    implicit none
+
+    real(8), intent(in) :: a, b
+    real(8), intent(inout) :: c
+    integer, intent(in) :: n
+
+    real(8) :: s, x, h
+    integer :: i
+
+    ! cálculo del intervalo
+    h = (b-a)/dble(n)
+
+    s = 0d0
+
+    do i = 1, n-1
+      x = a + h*dble(i)
+
+      ! f1 es la funcion f(x) a integrar
+      ! f1 está definida en este módulo
+      s = s + f1(x)
+    end do
+
+    c = 0.5*h*(f1(a) + f1(b) + 2*s)
+
+  end subroutine
+
+  function f2(x)
+    implicit none
+
+    real(8), intent(in) :: x
+    real(8) :: f2
+
+    f2 = gaussNormal(x)
+  end function
+
+
+  subroutine simpson(a,b,n,s)
+
+    ! calculo de la integral de f2, f(x), por el método de simpson. límites de integración, número de intervalos, resultado.
+
+    implicit none
+
+    integer, intent(in) :: n
+    real(8), intent(in) :: a, b
+    real(8), intent(inout) :: s
+
+    real(8) :: s1, s2, h, x
+    integer :: i
+
+    h = (b-a)/dble(n)
+
+    s1 = 0d0
+    do i = 1, n-1,2
+      x = a + h*dble(i)
+      s1 = s1 + f2(x)
+    end do
+
+    s2 = 0d0
+    do i = 2, n-2, 2
+      x = a + h*dble(i)
+      s2 = s2 + f2(x)
+    end do
+
+    s = (h/dble(3))*(f2(a) + f2(b) + dble(4)*s1 + dble(2)*s2)
+
+  end subroutine
+
+
+
+
 end module
