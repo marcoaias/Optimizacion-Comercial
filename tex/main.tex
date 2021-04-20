@@ -107,6 +107,8 @@ xmax=20,
 xmin=5,
 %domain=5:35,
 samples=200,
+width=12cm, height=4cm,
+legend pos=north west,
 ]
 
 
@@ -143,12 +145,13 @@ title=Solución,
 axis lines = middle,
 xlabel={$\mu$},
 ylabel={$\sigma$},
-%ymax=20,
-%ymin=5,
+ymax=100,
+ymin=-100,
 %xmax=20,
 %xmin=5,
 domain=3:20,
 samples=200,
+width=12cm, height=4cm,
 ]
 
 \addplot [cyan, thick] {exp(x/7)+2 - 0.1*x^3 + 20*x - 20};
@@ -177,11 +180,10 @@ Según las figuras \ref{fig:curvas} y \ref{fig:sol}, la solución se encuentra e
 \section{Probabilidad EMSR}
 
 
-Para el cálculo de los EMSR(s), se requiere conocer la probabilidad de demanda; para lo cual el modelo toma los datos de demanda proyectados en la tabla \ref{tab:demanda} y forma una distribución normal de probabilidades.
+Para el cálculo de los EMSR(s), se requiere conocer la probabilidad de demanda; para lo cual el modelo toma los datos de demanda proyectados en la tabla \ref{tab:demanda} y forma una distribución normal de probabilidades.\\
 
-Como tal nos ocupa entonces calcular esta probabilidad gaussiana.
 
-La distribución gaussiana \eqref{eq:fgauss} está normalizada (si $\mu = 0$ y $\sigma = 1$) tal que la integral en \nolinebreak[4] $(-\infty, +\infty)$ iguala a \nolinebreak[4] $1$:
+La distribución gaussiana:
 
 \begin{align}
 f(x) &= \dfrac{1}{\sigma\sqrt{2\pi}}\exp\left({-\,\dfrac{1}{2}\left(\dfrac{x-\mu}{\sigma}\right)^2}\right) \label{eq:fgauss} \\[8pt]
@@ -189,7 +191,7 @@ P(t) &= \int_{-\infty}^{t} f(x) \dif x \underset{t\to +\infty}{=} 1 \label{eq:in
 \end{align}
 
 
-La integral \eqref{eq:intgauss} no se puede resolver de forma analítica, sino por métodos computacionales de integración numérica, series de Taylor, etc. En concreto la aproximaremos por el \emph{método del trapecio} y también por el método de Simpson.\\
+La integral \eqref{eq:intgauss} no se puede resolver de forma analítica, sino por aproximación por el \emph{método del trapecio} y también por el método de Simpson.\\
 
 
 

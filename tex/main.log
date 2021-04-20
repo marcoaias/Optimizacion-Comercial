@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.11.12)  20 APR 2021 10:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.11.12)  20 APR 2021 11:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -803,10 +803,15 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 48.
 
 (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+)
+Underfull \hbox (badness 10000) in paragraph at lines 183--184
+
+ []
+
+[1
 
 {c:/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 192--193
+Underfull \hbox (badness 10000) in paragraph at lines 194--195
 
  []
 
@@ -814,23 +819,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 192--193
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
 )
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: 99FDF337CD68F510EE1A0F547DB03A5A;98
-(rerunfilecheck)             After:  B221155876D44A5A1E46A4A95EBF7372;96.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: B221155876D44A5A1E46A4A95EBF7372;96.
  ) 
 Here is how much of TeX's memory you used:
- 29320 strings out of 479485
- 706904 string characters out of 5875915
- 1154942 words of memory out of 5000000
- 45813 multiletter control sequences out of 15000+600000
+ 29319 strings out of 479485
+ 706869 string characters out of 5875915
+ 1153788 words of memory out of 5000000
+ 45812 multiletter control sequences out of 15000+600000
  542664 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,19n,111p,769b,2178s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 108i,19n,111p,769b,2182s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/tex
 live/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2020
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2020/texmf-di
@@ -841,10 +840,10 @@ c/amsfonts/cm/cmr12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts
 pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/te
 xlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/202
 0/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on main.pdf (3 pages, 125706 bytes).
+Output written on main.pdf (3 pages, 125259 bytes).
 PDF statistics:
- 127 PDF objects out of 1000 (max. 8388607)
- 88 compressed objects within 1 object stream
+ 126 PDF objects out of 1000 (max. 8388607)
+ 87 compressed objects within 1 object stream
  16 named destinations out of 1000 (max. 500000)
  29 words of extra memory for PDF output out of 10000 (max. 10000000)
 

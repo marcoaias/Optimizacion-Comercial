@@ -49,6 +49,17 @@ contains
 
   end function
 
+  function gauss(mu, sigma, x) result(f)
+
+    ! funcion gauss, media, desviación, x, f(x)
+
+    implicit none
+    real(8), intent(in) :: mu, sigma, x
+    real(8) :: f
+
+    f = exp(-0.5 * ((x-mu)/sigma)**2)/(sigma*sqrt(2*acos(-1.0)))
+  end function
+
 
   function f1(x)
 
