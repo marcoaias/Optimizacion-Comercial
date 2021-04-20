@@ -1,0 +1,237 @@
+\documentclass[12pt]{article}
+
+
+\usepackage{booktabs, multirow} % for borders and merged ranges
+\usepackage{soul}% for underlines
+\usepackage[table]{xcolor} % for cell colors
+\usepackage{changepage,threeparttable}
+
+
+\usepackage[official]{eurosym}
+
+
+\usepackage{commath}
+
+
+
+\usepackage[spanish,es-tabla]{babel}
+
+\usepackage{amsmath, amssymb, amsfonts}
+
+\usepackage{tikz, pgfplots}
+\pgfplotsset{compat=1.5}
+
+
+\usepackage{hyperref}
+
+
+
+
+
+\begin{document}
+
+
+\section{Productos}
+
+%Please add the following packages if necessary:
+%\usepackage{booktabs, multirow} % for borders and merged ranges
+%\usepackage{soul}% for underlines
+%\usepackage[table]{xcolor} % for cell colors
+%\usepackage{changepage,threeparttable} % for wide tables
+%If the table is too wide, replace \begin{table}[!htp]...\end{table} with
+%\begin{adjustwidth}{-2.5 cm}{-2.5 cm}\centering\begin{threeparttable}[!htb]...\end{threeparttable}\end{adjustwidth}
+
+\begin{adjustwidth}{-2.5 cm}{-2.5 cm}\centering
+\begin{threeparttable}[!htb]
+
+\small
+\begin{tabular}{lccccc}\toprule
+Clase de reserva &Tarifa [\euro] &Cambios permitidos &Sala Vip &Fast Track &Elección asiento \\\midrule
+A &180 &Sí &Sí &Sí &Sí \\
+B &130 &Solo 1 (penalización 25 \euro) &No &Sí &Sí \\
+C &100 &Solo 1 (penalización 60 \euro) &No &No &Sí \\
+D &80 &No &No &No &No \\
+E &40 &No &No &No &No \\
+\bottomrule
+\end{tabular}
+\caption{Servicios y precio de cada clase.}\label{tab:clases}
+\end{threeparttable}
+
+\end{adjustwidth}
+
+
+
+
+
+\begin{table}[!htp]\centering
+
+%\small
+\begin{tabular}{lrrr}\toprule
+Clase de reserva &$\mu$ &$\sigma$ \\\midrule
+A &\hl{ ? } &\hl{ ? } \\
+B &87 &8 \\
+C &89 &9 \\
+D &\hl{ ? } &\hl{ ? } \\
+E &60 &9 \\
+\bottomrule
+\end{tabular}
+
+\caption{Proyección de demanda para cada clase. (Trayecto MAD - BIO)}\label{tab:demanda}
+\end{table}
+
+
+
+
+
+\begin{align}
+\sigma &= e^{\mu / 7} + 2\label{eq:expbio}\\[8px]
+\sigma &= \dfrac{1}{10}\mu^{3} -20\mu + 20\label{eq:cubbio}
+\end{align}
+
+\vspace{10pt}
+
+La tabla \ref{tab:demanda} y las ecuaciones \eqref{eq:expbio} y \eqref{eq:cubbio} corresponden al trayecto MAD - BIO; las ecuaciones aplican a las clases A y D.
+
+
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis} [
+title=Curvas de demanda,
+xlabel={$\mu$},
+ylabel={$\sigma$},
+ymax=20,
+ymin=5,
+xmax=20,
+xmin=5,
+%domain=5:35,
+samples=200,
+]
+
+
+
+
+
+
+\addplot [red, thick,domain=5:35, restrict y to domain=1:30] {exp(x/7)+2};
+\addlegendentry{$e^{\mu / 7} + 2$}
+
+\addplot [blue, thick,domain=5:35, restrict y to domain=-90:120] {0.1*x^3 - 20*x + 20};
+\addlegendentry{$0.1\mu^{3} -20\mu + 20$}
+
+
+
+\end{axis}
+
+
+\end{tikzpicture}
+\caption{Representación de las ecuaciones \eqref{eq:expbio} y \eqref{eq:cubbio}}\label{fig:curvas}
+\end{figure}
+
+
+Sea el espacio de la solución:
+$$\left\{5 \leq \mu \leq 35\right\}, \left\{1 \leq \sigma \leq 30\right\}$$
+
+
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis} [
+title=Solución,
+axis lines = middle,
+xlabel={$\mu$},
+ylabel={$\sigma$},
+%ymax=20,
+%ymin=5,
+%xmax=20,
+%xmin=5,
+domain=3:20,
+samples=200,
+]
+
+\addplot [cyan, thick] {exp(x/7)+2 - 0.1*x^3 + 20*x - 20};
+
+
+\end{axis}
+
+
+\end{tikzpicture}
+\caption{Ecuación \eqref{eq:expbio} - \eqref{eq:cubbio}}\label{fig:sol}
+\end{figure}
+
+
+
+
+Según las figuras \ref{fig:curvas} y \ref{fig:sol}, la solución se encuentra en un entorno alrededor de $\mu \approx 14$.
+
+
+
+
+
+
+
+
+
+\section{Probabilidad EMSR}
+
+
+Para el cálculo de los EMSR(s), se requiere conocer la probabilidad de demanda; para lo cual el modelo toma los datos de demanda proyectados en la tabla \ref{tab:demanda} y forma una distribución normal de probabilidades.
+
+Como tal nos ocupa entonces calcular esta probabilidad gaussiana.
+
+La distribución gaussiana \eqref{eq:fgauss} está normalizada (si $\mu = 0$ y $\sigma = 1$) tal que la integral en \nolinebreak[4] $(-\infty, +\infty)$ iguala a \nolinebreak[4] $1$:
+
+\begin{align}
+f(x) &= \dfrac{1}{\sigma\sqrt{2\pi}}\exp\left({-\,\dfrac{1}{2}\left(\dfrac{x-\mu}{\sigma}\right)^2}\right) \label{eq:fgauss} \\[8pt]
+P(t) &= \int_{-\infty}^{t} f(x) \dif x \underset{t\to +\infty}{=} 1 \label{eq:intgauss}
+\end{align}
+
+
+La integral \eqref{eq:intgauss} no se puede resolver de forma analítica, sino por métodos computacionales de integración numérica, series de Taylor, etc. En concreto la aproximaremos por el \emph{método del trapecio} y también por el método de Simpson.\\
+
+
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis} [
+axis lines = middle,
+xlabel={$x$},
+ylabel={$f$},
+ymax=0.5,
+%ymin=5,
+xmax=3,
+xmin=-3,
+%domain=3:20,
+samples=200,
+width=12cm,height=4cm,
+]
+
+\addplot [magenta, thick] {exp(-0.5*x^2)/(2*3.141592)^0.5};
+
+
+\end{axis}
+
+
+\end{tikzpicture}
+\caption{Ecuación $\underset{\mu = 0,\,\sigma = 1}{\text{\eqref{eq:fgauss}}}$}\label{fig:campana}
+\end{figure}
+
+
+
+Dado que la función \eqref{eq:fgauss} es simétrica, la integral $\underset{t = \mu}{\text{\eqref{eq:intgauss}}}$ es igual a $\frac{1}{2}$. Entonces no es necesario calcular entre $(-\infty, t)$ si $\mu < t$, sino $\frac{1}{2} + \int_\mu^t f(x)\dif x$ etc. lo que alivia muchos recursos computacionales.\\
+
+De la misma manera, si $t < \mu$, basta con calcular $\frac{1}{2} + \int_\mu^t f(x)\dif x$.
+
+\begin{align}
+P(t) = \dfrac{1}{2} + \int_\mu^t f(x)\dif x
+\end{align}
+
+
+
+
+
+
+\end{document}
