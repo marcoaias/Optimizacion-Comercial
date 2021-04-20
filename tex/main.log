@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.11.12)  20 APR 2021 10:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.11.12)  20 APR 2021 10:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -722,7 +722,10 @@ File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
 \l__kernel_color_stack_int=\count310
 \l__pdf_internal_box=\box65
 )
-No file main.aux.
+(./main.aux
+LaTeX Info: Redefining \. on input line 25.
+LaTeX Info: Redefining \% on input line 25.
+)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
@@ -741,7 +744,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
 LaTeX Font Info:    ... okay on input line 31.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 31.
 LaTeX Font Info:    ... okay on input line 31.
-(c:/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (c:/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count311
 \scratchdimen=\dimen294
@@ -784,6 +787,8 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 31.
 LaTeX Info: Redefining \pageref on input line 31.
 LaTeX Info: Redefining \nameref on input line 31.
+
+(./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
@@ -798,71 +803,12 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 48.
 
 (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-
-LaTeX Warning: Reference `tab:demanda' on page 1 undefined on input line 93.
-
-
-LaTeX Warning: Reference `eq:expbio' on page 1 undefined on input line 93.
-
-
-LaTeX Warning: Reference `eq:cubbio' on page 1 undefined on input line 93.
-
-
-LaTeX Warning: Reference `eq:expbio' on page 1 undefined on input line 129.
-
-
-LaTeX Warning: Reference `eq:cubbio' on page 1 undefined on input line 129.
-
-
-LaTeX Warning: Reference `eq:expbio' on page 1 undefined on input line 161.
-
-
-LaTeX Warning: Reference `eq:cubbio' on page 1 undefined on input line 161.
-
-
-LaTeX Warning: Reference `fig:curvas' on page 1 undefined on input line 167.
-
-
-LaTeX Warning: Reference `fig:sol' on page 1 undefined on input line 167.
-
-
-LaTeX Warning: Reference `tab:demanda' on page 1 undefined on input line 180.
-
-[1
+) [1
 
 {c:/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
-
-LaTeX Warning: Reference `eq:fgauss' on page 3 undefined on input line 184.
-
-
-LaTeX Warning: Reference `eq:intgauss' on page 3 undefined on input line 192.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 192--193
 
  []
-
-
-LaTeX Warning: Reference `eq:fgauss' on page 3 undefined on input line 219.
-
-
-LaTeX Warning: Reference `eq:fgauss' on page 3 undefined on input line 219.
-
-
-LaTeX Warning: Reference `eq:fgauss' on page 3 undefined on input line 219.
-
-
-LaTeX Warning: Reference `eq:fgauss' on page 3 undefined on input line 224.
-
-
-LaTeX Warning: Reference `eq:intgauss' on page 3 undefined on input line 224.
-
-
-LaTeX Warning: Reference `eq:intgauss' on page 3 undefined on input line 224.
-
-
-LaTeX Warning: Reference `eq:intgauss' on page 3 undefined on input line 224.
 
 [3] (./main.aux
 LaTeX Info: Redefining \. on input line 25.
@@ -874,23 +820,17 @@ Package rerunfilecheck Warning: File `main.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             Before: 99FDF337CD68F510EE1A0F547DB03A5A;98
 (rerunfilecheck)             After:  B221155876D44A5A1E46A4A95EBF7372;96.
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 29316 strings out of 479485
- 706879 string characters out of 5875915
- 1154120 words of memory out of 5000000
+ 29320 strings out of 479485
+ 706904 string characters out of 5875915
+ 1154942 words of memory out of 5000000
  45813 multiletter control sequences out of 15000+600000
- 543592 words of font info for 61 fonts, out of 8000000 for 9000
+ 542664 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,19n,111p,769b,2180s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 108i,19n,111p,769b,2178s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/tex
 live/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2020
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2020/texmf-di
@@ -901,10 +841,10 @@ c/amsfonts/cm/cmr12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts
 pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/te
 xlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/202
 0/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on main.pdf (3 pages, 125349 bytes).
+Output written on main.pdf (3 pages, 125706 bytes).
 PDF statistics:
- 83 PDF objects out of 1000 (max. 8388607)
- 66 compressed objects within 1 object stream
+ 127 PDF objects out of 1000 (max. 8388607)
+ 88 compressed objects within 1 object stream
  16 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 29 words of extra memory for PDF output out of 10000 (max. 10000000)
 
