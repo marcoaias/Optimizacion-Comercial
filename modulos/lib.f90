@@ -143,6 +143,52 @@ contains
   end subroutine
 
 
+  function probabilidad(t, mu, sigma) result(P)
+    implicit none
+
+    real(8), intent(in) :: t, mu, sigma
+    real(8) :: P, s
+
+    call integralCDF(mu, t, 1000, s, sigma)
+
+    P = 0.5 + s
+
+  end function
+
+
+  subroutine integralCDF(mu,t,n,s,sigma)
+
+    ! Según el método de simpson se integra la probabilidad compuesta en función a mu y sigma
+    ! Función de probabilidad acumulada, CDF
+
+    implicit none
+
+    integer, intent(in) :: n
+    real(8), intent(in) :: t, mu, sigma
+    real(8), intent(inout) :: s
+
+    real(8) :: s1, s2, h, x
+    integer :: i
+
+    h = (t-mu)/dble(n)
+
+    s1 = 0d0
+    do i = 1, n-1,2
+      x = mu + h*dble(i)
+      s1 = s1 + gauss(mu, sigma, x)
+    end do
+
+    s2 = 0d0
+    do i = 2, n-2, 2
+      x = mu + h*dble(i)
+      s2 = s2 + gauss(mu, sigma, x)
+    end do
+
+    s = (h/dble(3))*(gauss(mu, sigma, mu) + gauss(mu, sigma, t) + dble(4)*s1 + dble(2)*s2)
+
+  end subroutine
+
+
 
 
 end module
