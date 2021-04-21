@@ -227,7 +227,7 @@ width=12cm,height=4cm,
 Dado que la función \eqref{eq:fgauss} es simétrica, la integral $\underset{t = \mu}{\text{\eqref{eq:intgauss}}}$ es igual a $\frac{1}{2}$. Entonces no es necesario calcular entre $(-\infty, t)$, sino $\frac{1}{2} + \int_\mu^t f(x)\dif x$ lo que alivia muchos recursos computacionales.
 
 \begin{align}
-P(t) = \dfrac{1}{2} + \int_\mu^t f(x)\dif x
+P(t) = \dfrac{1}{2} + \int_\mu^t f(x)\dif x \label{eq:probgauss}
 \end{align}
 
 
@@ -237,8 +237,9 @@ P(t) = \dfrac{1}{2} + \int_\mu^t f(x)\dif x
 \begin{axis} [
 title=Probabilidad acumulada,
 axis lines = middle,
+legend style={nodes={scale=0.5, transform shape}},
 xlabel={$t$},
-ylabel={$\underset{\mu = 0,\, \sigma = 1}{P(t)}$},
+ylabel={$\underset{\mu,\, \sigma}{P(t)}$},
 ymax=1.1,
 %ymin=5,
 xmax=3,
@@ -246,16 +247,25 @@ xmin=-3,
 %domain=3:20,
 %samples=200,
 width=12cm,height=4cm,
+legend pos=south east,
 ]
 
 \addplot [green, thick] table {data1.dat};
+\addlegendentry{$(0,1)$}
+\addplot [yellow, thick] table {data2.dat};
+\addlegendentry{$(0,0.5)$}
+\addplot [blue, thick] table {data3.dat};
+\addlegendentry{$(1,1)$}
+\addplot [red, thick] table {data4.dat};
+\addlegendentry{$(-2,0.3)$}
+
 
 
 \end{axis}
 
 
 \end{tikzpicture}
-\caption{caption}\label{fig:sig}
+\caption{Probabilidad acumulada en función de $t$ y $\mu , \, \sigma$ \eqref{eq:probgauss}}\label{fig:cdf}
 \end{figure}
 
 
@@ -271,7 +281,7 @@ La razón entre las tarifas de respectivas clases ha de ser igual a la probabili
 \end{regla}
 
 
-Ha de encontrarse el número de asientos protegidos que satisfaga la probabilidad de ser ocupados requerida por la razón de las respectivas tarifas.
+Ha de encontrarse el número de asientos protegidos ($t$) que satisfaga la probabilidad ($P(t)$) \eqref{eq:probgauss} de ser ocupados requerida por la razón de las respectivas tarifas.
 
 
 
