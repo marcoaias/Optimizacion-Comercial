@@ -282,7 +282,44 @@ La razón entre las tarifas de respectivas clases ha de ser igual a la probabili
 \end{regla}
 
 
-Ha de encontrarse el número de asientos protegidos ($t$) que satisfaga la probabilidad ($P(t)$) \eqref{eq:probgauss} de ser ocupados requerida por la razón de las respectivas tarifas.
+Ha de encontrarse el número de asientos protegidos ($t$) que satisfaga la probabilidad ($P(t)$) \eqref{eq:probgauss} de ser ocupados requerida por la razón de las respectivas tarifas.\\
+
+Ampliamos la tabla \ref{tab:demanda} para calcular los parámetros relativos a los EMSR(s):\\
+
+
+
+
+
+\begin{adjustwidth}{-2.5 cm}{-2.5 cm}\centering
+\begin{threeparttable}[!htb]
+
+%\small
+\begin{tabular}{lrcccccr}\toprule
+Clase$_i$ & Tarifa$_i$ & $\mu_i$ &$\sigma_i$ & Tarifa media ponderada & $\sum \mu_i$ & $\sqrt{\sum \sigma_i^2}$ & Protección\\\midrule
+A$_1$ & 180 & \hl{ ? } &\hl{ ? } & & & & \\
+B$_2$ & 130 & 87 &8 & & & & \\
+C$_3$ & 100 & 89 &9 & & & & \\
+D$_4$ & 80 & \hl{ ? } &\hl{ ? } & & & & \\
+E$_5$ & 40 & 60 &9 & - & - & - & -\\
+\bottomrule
+\end{tabular}
+
+\caption{Valores EMSR}\label{tab:emsr}
+\end{threeparttable}
+
+\end{adjustwidth}
+
+
+Según el algoritmo EMSR-b se comparan las clases en orden ascendente de precio. Se aplica la regla de Littlewood entre una clase y el resto cuál sea de mayor tarifa.
+i.e. la clase E ($i = 5$) se compara con el conjunto de las clases A, B, C y D; la clase C ($i = 3$) se compara con A y B etc.
+
+Entonces se obtiene la tarifa media ponderada de un conjunto de clases como:
+
+\begin{align}
+\dfrac{\sum \text{tarifa}_i \cdot \mu_i}{\sum \mu_i}
+\end{align}
+
+
 
 
 
