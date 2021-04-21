@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.2)  21 APR 2021 14:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.2)  21 APR 2021 15:05
 entering extended mode
 **./main.tex
 (main.tex
@@ -923,6 +923,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 287--288
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 313--315
+
+ []
+
 [4] [5] (main.aux
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
@@ -933,7 +938,7 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Here is how much of TeX's memory you used:
  29395 strings out of 479799
  715484 string characters out of 2869723
- 1271999 words of memory out of 3000000
+ 1272999 words of memory out of 3000000
  45850 multiletter control sequences out of 15000+200000
  542971 words of font info for 59 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -951,7 +956,7 @@ Marco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C
 :/Users/Marco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti
 12.pfb><C:/Users/Marco/AppData/Local/Programs/MiKTeX/fonts/type1/public/eurosym
 /feymr10.pfb>
-Output written on main.pdf (5 pages, 157872 bytes).
+Output written on main.pdf (5 pages, 158270 bytes).
 PDF statistics:
  144 PDF objects out of 1000 (max. 8388607)
  23 named destinations out of 1000 (max. 500000)
