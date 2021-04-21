@@ -231,6 +231,35 @@ P(t) = \dfrac{1}{2} + \int_\mu^t f(x)\dif x
 \end{align}
 
 
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis} [
+title=Probabilidad acumulada,
+axis lines = middle,
+xlabel={$t$},
+ylabel={$\underset{\mu = 0,\, \sigma = 1}{P(t)}$},
+ymax=1.1,
+%ymin=5,
+xmax=3,
+xmin=-3,
+%domain=3:20,
+%samples=200,
+width=12cm,height=4cm,
+]
+
+\addplot [green, thick] table {data1.dat};
+
+
+\end{axis}
+
+
+\end{tikzpicture}
+\caption{caption}\label{fig:sig}
+\end{figure}
+
+
+
 \section{Algoritmo EMSR-b}
 
 Consiste en proteger suficientes \emph{asientos} de respectivas clases con tal de maximizar el ingreso total.\\
