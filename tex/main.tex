@@ -85,8 +85,8 @@ E &60 &9 \\
 
 
 \begin{align}
-\sigma &= e^{\mu / 7} + 2\label{eq:expbio}\\[8px]
-\sigma &= \dfrac{1}{10}\mu^{3} -20\mu + 20\label{eq:cubbio}
+\sigma_1 &= e^{\mu / 7} + 2\label{eq:expbio}\\[8px]
+\sigma_2 &= \dfrac{1}{10}\mu^{3} -20\mu + 20\label{eq:cubbio}
 \end{align}
 
 \vspace{10pt}
@@ -145,7 +145,7 @@ $$\left\{5 \leq \mu \leq 35\right\}, \left\{1 \leq \sigma \leq 30\right\}$$
 title=Solución,
 axis lines = middle,
 xlabel={$\mu$},
-ylabel={$\sigma$},
+ylabel={$\sigma_1 - \sigma_2$},
 ymax=100,
 ymin=-100,
 %xmax=20,
@@ -240,7 +240,7 @@ title=Probabilidad acumulada,
 axis lines = middle,
 legend style={nodes={scale=0.5, transform shape}},
 xlabel={$t$},
-ylabel={$\underset{\mu,\, \sigma}{P(t)}$},
+ylabel={$\underset{(\mu,\, \sigma)}{P(t)}$},
 ymax=1.1,
 %ymin=5,
 xmax=3,
@@ -259,14 +259,11 @@ legend pos=south east,
 \addlegendentry{$(1,1)$}
 \addplot [red, thick] table {data4.dat};
 \addlegendentry{$(-2,0.3)$}
-
-
-
 \end{axis}
 
 
 \end{tikzpicture}
-\caption{Probabilidad acumulada en función de $t$ y $\mu , \, \sigma$ \eqref{eq:probgauss}}\label{fig:cdf}
+\caption{Probabilidad acumulada en función de $t$ y $(\mu , \, \sigma)$ \eqref{eq:probgauss}}\label{fig:cdf}
 \end{figure}
 
 
@@ -317,10 +314,57 @@ i.e. la clase E ($i = 5$) se compara con el conjunto de las clases A, B, C y D; 
 Entonces se obtiene la tarifa media ponderada de un conjunto de clases como:
 
 \begin{align}
-\text{Tarifa media ponderada}_i = \dfrac{\sum_{k=1}^{i} \text{tarifa}_k \cdot \mu_k}{\sum_{k=1}^{i} \mu_k}
+\text{Tarifa media ponderada}_i \equiv \text{tmp}_i = \dfrac{\sum_{k=1}^{i} \text{tarifa}_k \cdot \mu_k}{\sum_{k=1}^{i} \mu_k}
+\end{align}
+
+Para el conjunto de demanda se agregan las demandas:
+
+\begin{align}
+\sum_{k=1}^{i} \mu_k
+\end{align}
+
+Para la desviación conjunta se toma la raíz cuadrada del sumatorio de las varianzas:
+
+\begin{align}
+\sqrt{\sum_{k=1}^i \sigma_k^2}
 \end{align}
 
 
+Dados estos parámetros conjuntos, se procede a aplicar la regla de Littlewood entre cada clase y el conjunto restante.
+
+\begin{align}
+\text{tmp}_i = \text{tarifa}_{i + 1} \cdot P(x > \theta)
+\end{align}
+
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis} [
+title=Complementario,
+axis lines = middle,
+legend style={nodes={scale=0.5, transform shape}},
+xlabel={$t$},
+ylabel={$\underset{(\mu,\, \sigma)}{P(t)}$},
+ymax=1.1,
+%ymin=5,
+xmax=3,
+xmin=-3,
+%domain=3:20,
+%samples=200,
+width=12cm,height=4cm,
+legend pos=north east,
+]
+
+
+\addplot [red, thick] table {data5.dat};
+\addlegendentry{$(0,1)$}
+\end{axis}
+
+
+\end{tikzpicture}
+\caption{Complementario de CDF}\label{fig:comcdf}
+\end{figure}
 
 
 

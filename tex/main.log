@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.2)  21 APR 2021 15:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.2)  21 APR 2021 19:31
 entering extended mode
 **./main.tex
 (main.tex
@@ -808,6 +808,10 @@ File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
 ) (main.aux
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
+
+
+LaTeX Warning: Label `fig:cdf' multiply defined.
+
 )
 \openout1 = `main.aux'.
 
@@ -903,43 +907,49 @@ PGFPlots: reading {data2.dat}
 PGFPlots: reading {data3.dat}
 PGFPlots: reading {data4.dat}
 
-Underfull \hbox (badness 10000) in paragraph at lines 276--277
+Underfull \hbox (badness 10000) in paragraph at lines 273--274
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 285--286
+Underfull \hbox (badness 10000) in paragraph at lines 282--283
 
  []
 
 
-Overfull \hbox (3.02094pt too wide) in paragraph at lines 287--288
+Overfull \hbox (3.02094pt too wide) in paragraph at lines 284--285
 []\OT1/cmr/m/n/12 Ampliamos la ta-bla []2[] pa-ra cal-cu-lar los parame-tros r
 e-la-ti-vos a los EMSR(s): 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 287--288
+Underfull \hbox (badness 10000) in paragraph at lines 284--285
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 313--315
+Underfull \hbox (badness 10000) in paragraph at lines 310--312
 
  []
 
-[4] [5] (main.aux
+[4]
+PGFPlots: reading {data5.dat}
+ [5] (main.aux
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
 )
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 8A2CDC7F09DB44A2491B271F22376386;147.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 29395 strings out of 479799
- 715484 string characters out of 2869723
- 1272999 words of memory out of 3000000
- 45850 multiletter control sequences out of 15000+200000
+ 29416 strings out of 479799
+ 715825 string characters out of 2869723
+ 1273042 words of memory out of 3000000
+ 45865 multiletter control sequences out of 15000+200000
  542971 words of font info for 59 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,19n,111p,771b,2212s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -956,9 +966,9 @@ Marco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C
 :/Users/Marco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti
 12.pfb><C:/Users/Marco/AppData/Local/Programs/MiKTeX/fonts/type1/public/eurosym
 /feymr10.pfb>
-Output written on main.pdf (5 pages, 158270 bytes).
+Output written on main.pdf (5 pages, 163919 bytes).
 PDF statistics:
- 144 PDF objects out of 1000 (max. 8388607)
- 23 named destinations out of 1000 (max. 500000)
+ 149 PDF objects out of 1000 (max. 8388607)
+ 27 named destinations out of 1000 (max. 500000)
  37 words of extra memory for PDF output out of 10000 (max. 10000000)
 
