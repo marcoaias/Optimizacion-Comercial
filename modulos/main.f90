@@ -11,6 +11,6 @@ program main
 
   call display_integer_matrix(A,3)
 
-  print *, probabilidad(dble(2), dble(1), dble(2))
+  print *, probabilidad(dble(0), dble(1), dble(2))
 
 end program
