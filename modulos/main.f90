@@ -67,9 +67,11 @@ program main
 
 
   ! output data into a file
-   ! open(1, file = 'data5.dat', status = 'new')
+
+
+   ! open(1, file = 'data.csv', status = 'new')
    ! do i=1,n+1
-   !    write(1,*) array(i,1), array(i,2)
+   !    write(1,*) array(i,1), ",", array(i,2)
    ! end do
    !
    ! close(1)

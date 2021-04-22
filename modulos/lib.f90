@@ -264,10 +264,13 @@ contains
 
     v = 0.d0
 
-    tol = dble(0.000001)
+    tol = dble(0.0000000001)
 
     do i = 1, filas-1
-      x = A(i,5) - 0.3*A(i,6)
+
+      ! solución inicial centrada en mu siempre garantiza convergencia
+
+      x = A(i,5)
 
       ! resolución iterativa según la linealización del complementario cdf, quasi método de Newton
 
@@ -276,11 +279,11 @@ contains
       do j = 1, 100
         s = A(i+1, 1)/A(i, 4) - 1 + probabilidad(x, A(i,5), A(i,6))
 
-        print *, "x: ", x, "s: ", s
+        ! print *, "x: ", x, "s: ", s
 
         if ( abs(s) < tol ) then
           v(i) = x
-          print *, i, v(i)
+          print *, i, v(i), j
 
           print *, A(i+1, 1)/A(i, 4)
           print *, 1 - probabilidad(v(i), A(i,5), A(i,6))
