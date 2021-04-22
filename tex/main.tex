@@ -333,7 +333,7 @@ Para la desviación conjunta se toma la raíz cuadrada del sumatorio de las vari
 Dados estos parámetros conjuntos, se procede a aplicar la regla de Littlewood entre cada clase y el conjunto restante.
 
 \begin{align}
-\text{tmp}_i = \text{tarifa}_{i + 1} \cdot P(x > \theta)
+\dfrac{\text{tarifa}_{i + 1}}{\text{tmp}_i} =  P(x > \theta_i)
 \end{align}
 
 
@@ -345,7 +345,7 @@ title=Complementario,
 axis lines = middle,
 legend style={nodes={scale=0.5, transform shape}},
 xlabel={$t$},
-ylabel={$\underset{(\mu,\, \sigma)}{P(t)}$},
+ylabel={$\underset{(\mu,\, \sigma)}{1 - P(t)}$},
 ymax=1.1,
 %ymin=5,
 xmax=3,

@@ -190,5 +190,85 @@ contains
 
 
 
+  ! Esta subrutina calcula los valores emsr relevantes, según el algoritmo EMSR-b, desde y hacia la tabla A(filas, 6), ordenada descendentemente en función de las tarifas de las clases.
+
+  ! La tabla A() se usará para calcular los niveles de protección para cada clase.
+
+  subroutine valores_emsr(A, filas)
+    implicit none
+
+    integer, intent(in) :: filas
+    real(8), intent(inout) :: A(filas, 6)
+
+    integer :: i, k
+    real(8) :: s
+
+    do i = 1, filas
+
+      s = 0.d0
+      do k = 1, i
+        s = s + A(k, 2)
+      end do
+
+      A(i,5) = s
+
+      s = 0.d0
+      do k = 1, i
+        s = s + A(k, 1)*A(k, 2)
+      end do
+
+      A(i,4) = s/A(i,5)
+
+      s = 0.d0
+      do k = 1, i
+        s = s + A(k, 3)*A(k, 3)
+      end do
+
+      A(i, 6) = sqrt(s)
+
+
+    end do
+  end subroutine
+
+
+  subroutine proteger (A, filas, v)
+    implicit none
+
+    integer, intent(in) :: filas
+    real(8), intent(in) :: A(filas, 6)
+    real(8), intent(inout) :: v(filas-1)
+
+    integer :: i, j
+    real(8) :: s, x, tol, dx
+
+    v = 0.d0
+
+    tol = dble(0.01)
+
+    do i = 1, filas-1
+      x = A(i,5) - 0.5*A(i,6)
+      do j = 1, 1000
+        s = A(i+1, 1)/A(i, 4) - 1 + probabilidad(x, A(i,5), A(i,6))
+
+        if ( s < tol ) then
+          v(i) = x
+          print *, i, v(i)
+          exit
+        end if
+
+        ! pendiente negativa ojo TODO
+        dx = -gauss(A(i,5), A(i,6), x)
+
+        x = -s/dx + x
+
+      end do
+
+    end do
+
+
+
+  end subroutine
+
+
 
 end module
