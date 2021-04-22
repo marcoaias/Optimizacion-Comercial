@@ -301,7 +301,7 @@ E$_5$ & 40 & 60 &9 & - & - & - & -\\
 \bottomrule
 \end{tabular}
 
-\caption{Valores EMSR}\label{tab:emsr}
+\caption{Valores EMSR-b}\label{tab:emsr}
 \end{threeparttable}
 
 \end{adjustwidth}
@@ -365,6 +365,61 @@ legend pos=north east,
 \end{tikzpicture}
 \caption{Complementario de CDF}\label{fig:comcdf}
 \end{figure}
+
+Ha de encontrarse un valor $\theta_i$ para cada conjunto de clase, que representa el número de asientos protegidos, para el cuál la probabilidad de que tantos sean ocupados sea igual a la razón de tarifas.
+
+\begin{align}
+g(\theta) = \int_{\mu_i}^{\theta_i} \underset{(\mu_i, \, \sigma_i)}{f(x)}\dif x + \dfrac{\text{tarifa}_{i + 1}}{\text{tmp}_i} - \dfrac{1}{2} = 0 \label{eq:gtheta}
+\end{align}
+
+Se puede resolver por linealización, i.e. Newton.\\
+
+
+
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis} [
+title=Linealización,
+axis lines = center,
+legend style={nodes={scale=0.5, transform shape}},
+xlabel={$\theta$},
+ylabel={$\underset{(\mu_i,\, \sigma_i)}{1 - P(\theta)}$},
+ymax=1.1,
+%ymin=5,
+xmax=3,
+xmin=-3,
+ticks=none,
+%domain=3:20,
+%samples=200,
+width=12cm,height=6cm,
+legend pos=north east,
+]
+
+
+\addplot [red, thick] table {data5.dat};
+\addlegendentry{$(\mu_i,\sigma_i)$}
+
+\addplot [blue, thick] {0.2};
+\addlegendentry{$y=\text{tarifa}_{i+1}/\text{tmp}_i$}
+\addplot [] {-0.399*(x-0)+0.5};
+\addlegendentry{$\left(1-P(\theta)\right)o(\theta^1)$}
+\end{axis}
+
+
+\end{tikzpicture}
+\caption{Resolución de \eqref{eq:gtheta}}\label{fig:gtheta}
+\end{figure}
+
+
+
+
+Se resuelve para todos los valores EMSR y completa la tabla \ref{tab:emsr}.
+
+
+
+
 
 
 
