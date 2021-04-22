@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.2)  22 APR 2021 12:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.12.2)  22 APR 2021 21:36
 entering extended mode
 **./main.tex
 (main.tex
@@ -945,10 +945,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 8A2CDC7F09DB44A2491B271F22376386;147.
  ) 
 Here is how much of TeX's memory you used:
- 29441 strings out of 479799
- 716268 string characters out of 2869723
- 1273141 words of memory out of 3000000
- 45887 multiletter control sequences out of 15000+200000
+ 29440 strings out of 479799
+ 716257 string characters out of 2869723
+ 1287296 words of memory out of 3000000
+ 45886 multiletter control sequences out of 15000+200000
  542971 words of font info for 59 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,19n,111p,771b,2222s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -966,7 +966,7 @@ arco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C
 8.pfb><C:/Users/Marco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
 /cm/cmti12.pfb><C:/Users/Marco/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /eurosym/feymr10.pfb>
-Output written on main.pdf (6 pages, 178617 bytes).
+Output written on main.pdf (6 pages, 179613 bytes).
 PDF statistics:
  161 PDF objects out of 1000 (max. 8388607)
  30 named destinations out of 1000 (max. 500000)
