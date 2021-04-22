@@ -19,6 +19,20 @@ contains
     end do
   end subroutine
 
+  subroutine show_array(A, m, n)
+    implicit none
+
+    integer, intent(in) :: m, n
+    real(8), intent(in) :: A(m,n)
+
+    integer :: i
+
+    do i = 1, m
+      print *, A(i,:)
+    end do
+
+  end subroutine
+
   subroutine display_integer_matrix(A,n)
 
     ! Muestra matrizes cuadradas de enteros por pantalla
@@ -231,6 +245,13 @@ contains
   end subroutine
 
 
+  ! aplica la regla de Littlewood; compara cada clase al conjunto restante según el algoritmo EMSRb;
+
+  ! recibe como parámetros la tabla de los valores emsr calculados en la subrutina valores_emsr, el número de filas (clases) que contiene la tabla, y el vector solución v que contiene los niveles de protección para cada clase comparado con el resto.
+
+  ! véase:
+  ! https://youtu.be/mZY4CU05PLw
+
   subroutine proteger (A, filas, v)
     implicit none
 
@@ -243,23 +264,38 @@ contains
 
     v = 0.d0
 
-    tol = dble(0.01)
+    tol = dble(0.000001)
 
     do i = 1, filas-1
-      x = A(i,5) - 0.5*A(i,6)
-      do j = 1, 1000
+      x = A(i,5) - 0.3*A(i,6)
+
+      ! resolución iterativa según la linealización del complementario cdf, quasi método de Newton
+
+      ! solución inicial centrada alrededor de mu, en media desviación estandar.
+
+      do j = 1, 100
         s = A(i+1, 1)/A(i, 4) - 1 + probabilidad(x, A(i,5), A(i,6))
 
-        if ( s < tol ) then
+        print *, "x: ", x, "s: ", s
+
+        if ( abs(s) < tol ) then
           v(i) = x
           print *, i, v(i)
+
+          print *, A(i+1, 1)/A(i, 4)
+          print *, 1 - probabilidad(v(i), A(i,5), A(i,6))
           exit
         end if
+
+
 
         ! pendiente negativa ojo TODO
         dx = -gauss(A(i,5), A(i,6), x)
 
-        x = -s/dx + x
+        ! print *, dx
+        ! print *, i,j,x
+        x = s/dx + x
+        ! print *, i,j,x
 
       end do
 
