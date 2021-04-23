@@ -50,6 +50,14 @@ contains
   end subroutine
 
 
+  character(len=20) function str(k)
+!   "Convert an integer to string."
+    integer, intent(in) :: k
+    write (str, *) k
+    str = adjustl(str)
+  end function str
+
+
   function gaussNormal(x) result(f)
 
     ! gaussNormal(x) devuelve el valor de la distribución normal Gaussiana

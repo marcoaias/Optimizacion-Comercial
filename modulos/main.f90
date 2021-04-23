@@ -2,7 +2,7 @@ program main
   use lib
   implicit none
 
-  integer :: n, i
+  integer :: n, i, j
   real(8) :: t, mu, sigma, h, array(251, 2), A(5,6), v(5), B(4,6)
 
   n = 250
@@ -59,6 +59,40 @@ program main
 
   call show_array(v,5, 1)
 
+
+
+
+
+
+  do j = 1, 5
+
+  sigma = A(j, 6)
+  mu = A(j, 5)
+
+  h = 1.5*3*2*sigma/dble(n)
+
+  do i = 0, n
+    t = -3*sigma + i*h + mu
+
+
+
+    array(i+1, 1) = t
+    array(i+1, 2) = gauss(mu,sigma,t)!probabilidad(t, mu, sigma)
+
+    ! print *, i, array(i+1, 1), array(i+1, 2)
+
+  end do
+
+  open(j, file = "data"//trim(str(j+5))//".dat", status = 'new')
+  do i=1,n+1
+     write(j,*) array(i,1), array(i,2)
+  end do
+
+  close(j)
+
+
+
+  end do
 
 
 

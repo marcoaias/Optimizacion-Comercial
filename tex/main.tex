@@ -13,6 +13,7 @@
 \usepackage{color}
 % \usepackage[usenames,dvipsnames]{xcolor}
 
+
 \newcommand{\hlc}[2][yellow]{ {\sethlcolor{#1} \hl{#2}} }
 
 \usepackage{commath}
@@ -415,7 +416,6 @@ legend pos=north east,
 \addlegendentry{$\left(1-P(\theta)\right)\mathcal{O}(\theta^1)$}
 \end{axis}
 
-
 \end{tikzpicture}
 \caption{Resolución de \eqref{eq:gtheta}}\label{fig:gtheta}
 \end{figure}
@@ -451,6 +451,91 @@ E$_5$ & 40 & 60 &9 & \hlc[cyan]{ (99) }   & \hlc[cyan]{ (264) } & \hlc[cyan]{ (2
 \end{threeparttable}
 
 \end{adjustwidth}
+
+
+
+
+
+
+\begin{figure}
+\centering
+
+\makebox[\textwidth]{
+\begin{tikzpicture}
+\begin{axis} [
+title=Tabla,
+axis lines = left,
+axis y line*=left,
+legend style={nodes={scale=0.5, transform shape}},
+xlabel={$\theta$},
+ylabel=$1 - ${$\underset{(\overline{\mu}_i, \, \overline{\sigma}_i)}{ P(\theta)}$},
+ymax=0.048,
+%ymin=5,
+% xmax=3,
+% xmin=-3,
+% ticks=none,
+xtick={14,101,190,204,264},
+    xticklabels={A, B, C, D, E},
+%domain=3:20,
+%samples=200,
+width=18cm,height=7cm,
+legend pos=north east,
+]
+
+
+\addplot[] table{data6.dat};
+\addplot[] table{data7.dat};
+\addplot[] table{data8.dat};
+\addplot[] table{data9.dat};
+\addplot[] table{data10.dat};
+
+\addplot[] coordinates {(9,0) (9,1)};
+\addplot[] coordinates {(94,0) (94,1)};
+\addplot[] coordinates {(183,0) (183,1)};
+\addplot[] coordinates {(211,0) (211,1)};
+
+\end{axis}
+
+
+\begin{axis} [
+% axis lines = left,
+axis y line*=right,
+legend style={nodes={scale=0.5, transform shape}},
+% xlabel={$\theta$},
+ylabel=bruh,
+% ymax=0.048,
+ymin=0,
+% xmax=3,
+% xmin=-3,
+% ticks=none,
+xtick={},
+    xticklabels={},
+%domain=3:20,
+%samples=200,
+width=18cm,height=7cm,
+legend pos=north east,
+grid=major,
+]
+
+\addplot [dashed, blue, thin] {180};
+\addplot [dashed, blue, thin]  {130};
+\addplot [dashed, blue, thin]  {100};
+\addplot [dashed, blue, thin]  {80};
+\addplot [dashed, blue, thin]  {40};
+
+\end{axis}
+
+
+\end{tikzpicture}
+  }
+
+
+\caption{Distribuciones}\label{fig:tabla}
+\end{figure}
+
+
+
+
 
 
 
