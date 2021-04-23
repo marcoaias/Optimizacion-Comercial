@@ -257,7 +257,7 @@ contains
 
     integer, intent(in) :: filas
     real(8), intent(in) :: A(filas, 6)
-    real(8), intent(inout) :: v(filas-1)
+    real(8), intent(inout) :: v(filas)
 
     integer :: i, j
     real(8) :: s, x, tol, dx
@@ -265,6 +265,8 @@ contains
     v = 0.d0
 
     tol = dble(0.0000000001)
+
+
 
     do i = 1, filas-1
 
@@ -276,7 +278,7 @@ contains
 
       ! solución inicial centrada alrededor de mu, en media desviación estandar.
 
-      do j = 1, 100
+      do j = 1, 50
         s = A(i+1, 1)/A(i, 4) - 1 + probabilidad(x, A(i,5), A(i,6))
 
         ! print *, "x: ", x, "s: ", s
@@ -301,6 +303,38 @@ contains
         ! print *, i,j,x
 
       end do
+
+    end do
+
+
+    ! Ghost class
+
+    x = A(filas, 5)
+
+    do j = 1, 100
+      s = 0.1 - 1 + probabilidad(x, A(filas,5), A(filas,6))
+
+      ! print *, "x: ", x, "s: ", s
+
+      if ( abs(s) < tol ) then
+        v(filas) = x
+        print *, "GHOST CLASS"
+        print *, filas, v(filas), j
+
+        print *, 0.1
+        print *, 1 - probabilidad(v(filas), A(filas,5), A(filas,6))
+        exit
+      end if
+
+
+
+      ! pendiente negativa ojo TODO
+      dx = -gauss(A(filas,5), A(filas,6), x)
+
+      ! print *, dx
+      ! print *, i,j,x
+      x = s/dx + x
+      ! print *, i,j,x
 
     end do
 

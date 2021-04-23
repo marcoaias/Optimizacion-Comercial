@@ -3,7 +3,7 @@ program main
   implicit none
 
   integer :: n, i
-  real(8) :: t, mu, sigma, h, array(251, 2), A(5,6), v(4), B(4,6)
+  real(8) :: t, mu, sigma, h, array(251, 2), A(5,6), v(5), B(4,6)
 
   n = 250
   mu = 0.0
@@ -57,18 +57,18 @@ program main
 
   print *, "NIVELES DE PROTECCION"
 
-  call show_array(v,4, 1)
+  call show_array(v,5, 1)
 
 
 
 
   ! print *, probabilidad(dble(0), dble(1), dble(2))
 
-  call random_number(h)
-  print *, h
-
-  call random_number(h)
-  print *, h
+  ! call random_number(h)
+  ! print *, h
+  !
+  ! call random_number(h)
+  ! print *, h
 
   ! output data into a file
 
