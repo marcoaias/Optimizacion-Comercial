@@ -64,16 +64,21 @@ program main
 
   ! print *, probabilidad(dble(0), dble(1), dble(2))
 
+  call random_number(h)
+  print *, h
 
+  call random_number(h)
+  print *, h
 
   ! output data into a file
 
 
-   open(1, file = 'data2.dat', status = 'new')
-   do i=1,n+1
-      write(1,*) array(i,1), array(i,2)
-   end do
 
-   close(1)
+   ! open(1, file = 'data2.dat', status = 'new')
+   ! do i=1,n+1
+   !    write(1,*) array(i,1), array(i,2)
+   ! end do
+   !
+   ! close(1)
 
 end program
