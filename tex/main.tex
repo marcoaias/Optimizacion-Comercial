@@ -10,6 +10,11 @@
 \usepackage[official]{eurosym}
 
 
+\usepackage{color}
+% \usepackage[usenames,dvipsnames]{xcolor}
+
+\newcommand{\hlc}[2][yellow]{ {\sethlcolor{#1} \hl{#2}} }
+
 \usepackage{commath}
 
 \usepackage[utf8]{inputenc}
@@ -24,6 +29,9 @@
 
 
 \usepackage{hyperref}
+
+
+% \newcommand{\hlc}[2][yellow]{ {\sethlcolor{#1} \hl{#2}} }
 
 
 
@@ -292,7 +300,7 @@ Ampliamos la tabla \ref{tab:demanda} para calcular los parámetros relativos a l
 
 %\small
 \begin{tabular}{lrcccccr}\toprule
-Clase$_i$ & Tarifa$_i$ & $\mu_i$ &$\sigma_i$ & Tarifa media ponderada & $\sum \mu_i$ & $\sqrt{\sum \sigma_i^2}$ & Protección\\\midrule
+Clase$_i$ & Tarifa$_i$ & $\mu_i$ &$\sigma_i$ & $\text{tmp}_i$ & $\overline{\mu}_i$ & $\overline{\sigma}_i$ & Protección\\\midrule
 A$_1$ & 180 & \hl{ ? } &\hl{ ? } & & & & \\
 B$_2$ & 130 & 87 &8 & & & & \\
 C$_3$ & 100 & 89 &9 & & & & \\
@@ -320,20 +328,20 @@ Entonces se obtiene la tarifa media ponderada de un conjunto de clases como:
 Para el conjunto de demanda se agregan las demandas:
 
 \begin{align}
-\sum_{k=1}^{i} \mu_k
+\overline{\mu}_i = \sum_{k=1}^{i} \mu_k
 \end{align}
 
 Para la desviación conjunta se toma la raíz cuadrada del sumatorio de las varianzas:
 
 \begin{align}
-\sqrt{\sum_{k=1}^i \sigma_k^2}
+\overline{\sigma}_i = \sqrt{\sum_{k=1}^i \sigma_k^2}
 \end{align}
 
 
 Dados estos parámetros conjuntos, se procede a aplicar la regla de Littlewood entre cada clase y el conjunto restante.
 
 \begin{align}
-\dfrac{\text{tarifa}_{i + 1}}{\text{tmp}_i} =  \underset{(\mu_i, \, \sigma_i)}{P(x > \theta_i)}
+\dfrac{\text{tarifa}_{i + 1}}{\text{tmp}_i} =  \underset{(\overline{\mu}_i, \, \overline{\sigma}_i)}{P(x > \theta_i)}
 \end{align}
 
 
@@ -369,7 +377,7 @@ legend pos=north east,
 Ha de encontrarse un valor $\theta_i$ para cada conjunto de clase, que representa el número de asientos protegidos, para el cuál la probabilidad de que tantos sean ocupados sea igual a la razón de tarifas.
 
 \begin{align}
-g(\theta) = \int_{\mu_i}^{\theta_i} \underset{(\mu_i, \, \sigma_i)}{f(x)}\dif x + \dfrac{\text{tarifa}_{i + 1}}{\text{tmp}_i} - \dfrac{1}{2} = 0 \label{eq:gtheta}
+g(\theta) = \int_{\mu_i}^{\theta_i} \underset{(\overline{\mu}_i, \, \overline{\sigma}_i)}{f(x)}\dif x + \dfrac{\text{tarifa}_{i + 1}}{\text{tmp}_i} - \dfrac{1}{2} = 0 \label{eq:gtheta}
 \end{align}
 
 Se puede resolver por linealización, i.e. Newton.\\
@@ -385,7 +393,7 @@ title=Linealización,
 axis lines = center,
 legend style={nodes={scale=0.5, transform shape}},
 xlabel={$\theta$},
-ylabel=$1 - ${$\underset{(\mu_i,\, \sigma_i)}{ P(\theta)}$},
+ylabel=$1 - ${$\underset{(\overline{\mu}_i, \, \overline{\sigma}_i)}{ P(\theta)}$},
 ymax=1.1,
 %ymin=5,
 xmax=3,
@@ -399,7 +407,7 @@ legend pos=north east,
 
 
 \addplot [red, thick] table {data5.dat};
-\addlegendentry{$(\mu_i,\sigma_i)$}
+\addlegendentry{$(\overline{\mu}_i, \, \overline{\sigma}_i)$}
 
 \addplot [blue, thick] {0.2};
 \addlegendentry{$y=\text{tarifa}_{i+1}/\text{tmp}_i$}
@@ -418,6 +426,31 @@ legend pos=north east,
 Se resuelve para todos los valores EMSR y completa la tabla \ref{tab:emsr}.
 
 
+
+
+
+
+\subsection{Valores preliminares}
+
+
+\begin{adjustwidth}{-2.5 cm}{-2.5 cm}\centering
+\begin{threeparttable}[!htb]
+
+%\small
+\begin{tabular}{lrcccccr}\toprule
+Clase$_i$ & Tarifa$_i$ & $\mu_i$ &$\sigma_i$ & $\text{tmp}_i$ & $\overline{\mu}_i$ & $\overline{\sigma}_i$ & Protección\\\midrule
+A$_1$ & 180 & \hl{ 14 } &\hl{ 9 } & 180 & 14 & 9 & 9 \\
+B$_2$ & 130 & 87 & 8 & 137 & 101 & 12 & 94 \\
+C$_3$ & 100 & 89 & 9 & 120 & 190 & 15 & 183 \\
+D$_4$ & 80 & \hl{ 14 } &\hl{ 9 } & 117 & 204 & 18 & 211 \\
+E$_5$ & 40 & 60 &9 & \hlc[cyan]{ (99) }   & \hlc[cyan]{ (264) } & \hlc[cyan]{ (20) } & \hlc[cyan]{ - }\\
+\bottomrule
+\end{tabular}
+
+\caption{Valores EMSR-b preliminares}\label{tab:emsrpre}
+\end{threeparttable}
+
+\end{adjustwidth}
 
 
 
