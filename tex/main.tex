@@ -468,11 +468,11 @@ axis lines = left,
 axis y line*=left,
 legend style={nodes={scale=0.5, transform shape}},
 xlabel={$\theta$},
-ylabel=$1 - ${$\underset{(\overline{\mu}_i, \, \overline{\sigma}_i)}{ P(\theta)}$},
+ylabel=$f(\theta)$,
 ymax=0.048,
 %ymin=5,
-% xmax=3,
-% xmin=-3,
+xmax=350,
+xmin=-14,
 % ticks=none,
 xtick={14,101,190,204,264},
     xticklabels={A, B, C, D, E},
@@ -483,16 +483,17 @@ legend pos=north east,
 ]
 
 
-\addplot[] table{data6.dat};
-\addplot[] table{data7.dat};
-\addplot[] table{data8.dat};
-\addplot[] table{data9.dat};
-\addplot[] table{data10.dat};
+\addplot[blue, thick] table{data6.dat};
+\addplot[cyan, thick] table{data7.dat};
+\addplot[magenta, thick] table{data8.dat};
+\addplot[teal, thick] table{data9.dat};
+\addplot[red, thick] table{data10.dat};
 
-\addplot[] coordinates {(9,0) (9,1)};
-\addplot[] coordinates {(94,0) (94,1)};
-\addplot[] coordinates {(183,0) (183,1)};
-\addplot[] coordinates {(211,0) (211,1)};
+\addplot[dashed,thin, red] coordinates {(9,0) (9,1)};
+\addplot[dashed,thin, red] coordinates {(94,0) (94,1)};
+\addplot[dashed,thin, red] coordinates {(183,0) (183,1)};
+\addplot[dashed,thin, red] coordinates {(211,0) (211,1)};
+\addplot[dashed,thin, red] coordinates {(287,0) (287,1)};
 
 \end{axis}
 
@@ -502,26 +503,28 @@ legend pos=north east,
 axis y line*=right,
 legend style={nodes={scale=0.5, transform shape}},
 % xlabel={$\theta$},
-ylabel=bruh,
+ylabel=tmp$_i$,
 % ymax=0.048,
 ymin=0,
-% xmax=3,
-% xmin=-3,
+xmax=350,
+xmin=-14,
 % ticks=none,
 xtick={},
     xticklabels={},
-%domain=3:20,
+% domain=0:400,
 %samples=200,
 width=18cm,height=7cm,
 legend pos=north east,
-grid=major,
+grid=none,
 ]
 
-\addplot [dashed, blue, thin] {180};
-\addplot [dashed, blue, thin]  {130};
-\addplot [dashed, blue, thin]  {100};
-\addplot [dashed, blue, thin]  {80};
-\addplot [dashed, blue, thin]  {40};
+\addplot [dashed, blue, thin, domain=9:400] {180};
+\addplot [dashed, blue, thin, domain=94:400]  {130};
+\addplot [dashed, blue, thin, domain=183:400]  {100};
+\addplot [dashed, blue, thin, domain=211:400]  {80};
+\addplot [dashed, blue, thin, domain=287:400]  {40};
+
+
 
 \end{axis}
 
