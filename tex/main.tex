@@ -260,13 +260,13 @@ width=12cm,height=4cm,
 legend pos=south east,
 ]
 
-\addplot [cyan, thick] table {data1.dat};
+\addplot [cyan, thick] table {data/data1.dat};
 \addlegendentry{$(0,1)$}
-\addplot [magenta, thick] table {data2.dat};
+\addplot [magenta, thick] table {data/data2.dat};
 \addlegendentry{$(0,0.5)$}
-\addplot [blue, thick] table {data3.dat};
+\addplot [blue, thick] table {data/data3.dat};
 \addlegendentry{$(1,1)$}
-\addplot [red, thick] table {data4.dat};
+\addplot [red, thick] table {data/data4.dat};
 \addlegendentry{$(-2,0.3)$}
 \end{axis}
 
@@ -366,7 +366,7 @@ legend pos=north east,
 ]
 
 
-\addplot [red, thick] table {data5.dat};
+\addplot [red, thick] table {data/data5.dat};
 \addlegendentry{$(0,1)$}
 \end{axis}
 
@@ -378,7 +378,7 @@ legend pos=north east,
 Ha de encontrarse un valor $\theta_i$ para cada conjunto de clase, que representa el número de asientos protegidos, para el cuál la probabilidad de que tantos sean ocupados sea igual a la razón de tarifas.
 
 \begin{align}
-g(\theta) = \int_{\mu_i}^{\theta_i} \underset{(\overline{\mu}_i, \, \overline{\sigma}_i)}{f(x)}\dif x + \dfrac{\text{tarifa}_{i + 1}}{\text{tmp}_i} - \dfrac{1}{2} = 0 \label{eq:gtheta}
+g(\theta) = \dfrac{1}{2} - \int_{\mu_i}^{\theta_i} \underset{(\overline{\mu}_i, \, \overline{\sigma}_i)}{f(x)}\dif x - \dfrac{\text{tarifa}_{i + 1}}{\text{tmp}_i}  = 0 \label{eq:gtheta}
 \end{align}
 
 Se puede resolver por linealización, i.e. Newton.\\
@@ -407,7 +407,7 @@ legend pos=north east,
 ]
 
 
-\addplot [red, thick] table {data5.dat};
+\addplot [red, thick] table {data/data5.dat};
 \addlegendentry{$(\overline{\mu}_i, \, \overline{\sigma}_i)$}
 
 \addplot [blue, thick] {0.2};
@@ -443,7 +443,7 @@ A$_1$ & 180 & \hl{ 14 } &\hl{ 9 } & 180 & 14 & 9 & 9 \\
 B$_2$ & 130 & 87 & 8 & 137 & 101 & 12 & 94 \\
 C$_3$ & 100 & 89 & 9 & 120 & 190 & 15 & 183 \\
 D$_4$ & 80 & \hl{ 14 } &\hl{ 9 } & 117 & 204 & 18 & 211 \\
-E$_5$ & 40 & 60 &9 & \hlc[cyan]{ (99) }   & \hlc[cyan]{ (264) } & \hlc[cyan]{ (20) } & \hlc[cyan]{ - }\\
+E$_5$ & 40 & 60 &9 & \hlc[cyan]{ (99) }   & \hlc[cyan]{ (264) } & \hlc[cyan]{ (20) } & \hlc[cyan]{ (289)* }\\
 \bottomrule
 \end{tabular}
 
@@ -468,7 +468,7 @@ axis lines = left,
 axis y line*=left,
 legend style={nodes={scale=0.5, transform shape}},
 xlabel={$\theta$},
-ylabel=$f(\theta)$,
+ylabel=$f(\theta)_i$,
 ymax=0.048,
 %ymin=5,
 xmax=350,
@@ -483,11 +483,11 @@ legend pos=north east,
 ]
 
 
-\addplot[blue, thick] table{data6.dat};
-\addplot[cyan, thick] table{data7.dat};
-\addplot[magenta, thick] table{data8.dat};
-\addplot[teal, thick] table{data9.dat};
-\addplot[red, thick] table{data10.dat};
+\addplot[blue, thick] table{data/data6.dat};
+\addplot[cyan, thick] table{data/data7.dat};
+\addplot[magenta, thick] table{data/data8.dat};
+\addplot[teal, thick] table{data/data9.dat};
+\addplot[red, thick] table{data/data10.dat};
 
 \addplot[dashed,thin, red] coordinates {(9,0) (9,1)};
 \addplot[dashed,thin, red] coordinates {(94,0) (94,1)};
@@ -533,12 +533,51 @@ grid=none,
   }
 
 
-\caption{Distribuciones}\label{fig:tabla}
+\caption{Distribuciones}\label{fig:tablaf}
 \end{figure}
 
 
 
+\begin{figure}
+\centering
 
+\makebox[\textwidth]{
+\begin{tikzpicture}
+\begin{axis} [
+% title=Tabla,
+axis lines = middle,
+axis y line*=left,
+legend style={nodes={scale=0.5, transform shape}},
+xlabel={$\theta$},
+ylabel=$g(\theta)_i$,
+ymax=1,
+%ymin=5,
+xmax=350,
+xmin=-14,
+% ticks=none,
+xtick={9,94,183,211,289},
+    xticklabels={A, B, C, D, E},
+%domain=3:20,
+%samples=200,
+width=18cm,height=7cm,
+legend pos=north east,
+]
+
+
+\addplot[blue, thick] table{data/data11.dat};
+\addplot[cyan, thick] table{data/data12.dat};
+\addplot[magenta, thick] table{data/data13.dat};
+\addplot[teal, thick] table{data/data14.dat};
+\addplot[red, thick] table{data/data15.dat};
+
+
+\end{axis}
+\end{tikzpicture}
+  }
+
+
+\caption{Distribuciones}\label{fig:tablag}
+\end{figure}
 
 
 

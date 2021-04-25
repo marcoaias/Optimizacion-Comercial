@@ -3,7 +3,7 @@ program main
   implicit none
 
   integer :: n, i, j
-  real(8) :: t, mu, sigma, h, array(251, 2), A(5,6), v(5), B(4,6)
+  real(8) :: t, mu, sigma, h, array(251, 2), A(5,6), v(5), B(4,6), tarifas(6,2)
 
   n = 250
   mu = 0.0
@@ -61,6 +61,12 @@ program main
 
 
 
+  do i = 1, 5
+    tarifas(i,1) = A(i,1)
+    tarifas(i,2) = A(i,4)
+  end do
+
+  tarifas(6,1) = 9.990
 
 
 
@@ -69,7 +75,7 @@ program main
   sigma = A(j, 6)
   mu = A(j, 5)
 
-  h = 1.5*3*2*sigma/dble(n)
+  h = 3*2*sigma/dble(n)
 
   do i = 0, n
     t = -3*sigma + i*h + mu
@@ -77,13 +83,13 @@ program main
 
 
     array(i+1, 1) = t
-    array(i+1, 2) = gauss(mu,sigma,t)!probabilidad(t, mu, sigma)
+    array(i+1, 2) = -tarifas(j+1,1)/tarifas(j,2) + 1 - probabilidad(t, mu, sigma) !gauss(mu,sigma,t)!probabilidad(t, mu, sigma)
 
     ! print *, i, array(i+1, 1), array(i+1, 2)
 
   end do
 
-  open(j, file = "data"//trim(str(j+5))//".dat", status = 'new')
+  open(j, file = "data"//trim(str(j+10))//".dat", status = 'new')
   do i=1,n+1
      write(j,*) array(i,1), array(i,2)
   end do
