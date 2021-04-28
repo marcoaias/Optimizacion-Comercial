@@ -45,15 +45,23 @@
 \maketitle
 
 
+
+\section{A realizar}
+
+Sea una cierta compañía de trenes de alta velocidad; la cual ofrece servicios de transporte entre distintas ciudades españolas, desde y hacia Madrid.\\
+
+Sea el trayecto que nos compete Madrid-Bilbao, hemos de determinar la mejor manera de comercializar los asientos de tal tren según los distintos productos ofrecidos.\\
+
+Consiste en determinar la cantidad de asientos esperados a ser vendidos para cada producto, con tal de que el total vendido sea óptimo. \\
+
+Para tal se empleará un modelo de manejo de ingresos; ámpliamente usado, el algoritmo heurístico EMSR-b (Expected Marginal Seat Revenue).\\
+
+Con tal información de demanda esperada para cada producto, se ha de determinar el número de vagones a configurar para el tren, atendiendo a las tasas implicadas.
+
+
 \section{Productos}
 
-%Please add the following packages if necessary:
-%\usepackage{booktabs, multirow} % for borders and merged ranges
-%\usepackage{soul}% for underlines
-%\usepackage[table]{xcolor} % for cell colors
-%\usepackage{changepage,threeparttable} % for wide tables
-%If the table is too wide, replace \begin{table}[!htp]...\end{table} with
-%\begin{adjustwidth}{-2.5 cm}{-2.5 cm}\centering\begin{threeparttable}[!htb]...\end{threeparttable}\end{adjustwidth}
+
 
 \begin{adjustwidth}{-2.5 cm}{-2.5 cm}\centering
 \begin{threeparttable}[!htb]
@@ -74,6 +82,11 @@ E &40 &No &No &No &No \\
 \end{adjustwidth}
 
 
+\section{Demanda}
+
+Un departamento de \emph{forecasting} ha proyectado para un día en concreto la demanda esperada para cada producto. Ésta viene recogida en la tabla \ref{tab:demanda}.\\
+
+Se asume que la demanda para cada clase es independiente del resto; se asume la llegada de los clientes según la tarifa: primero se venden los asientos de la clase E, antes de ser vendidos aquellos con una tarifa más elevada.
 
 
 
@@ -467,7 +480,7 @@ E$_5$ & 40 & 60 &9 & \hlc[cyan]{ (99) }   & \hlc[cyan]{ (264) } & \hlc[cyan]{ (2
 \makebox[\textwidth]{
 \begin{tikzpicture}
 \begin{axis} [
-title=Tabla,
+% title=Tabla,
 axis lines = left,
 axis y line*=left,
 legend style={nodes={scale=0.5, transform shape}},
@@ -482,7 +495,7 @@ xtick={9,94,183,211,289},
     xticklabels={A, B, C, D, E},
 %domain=3:20,
 %samples=200,
-width=18cm,height=7cm,
+width=18cm,height=8cm,
 legend pos=north east,
 ]
 
@@ -517,7 +530,7 @@ xtick={},
     xticklabels={},
 % domain=0:400,
 %samples=200,
-width=18cm,height=7cm,
+width=18cm,height=8cm,
 legend pos=north east,
 grid=none,
 ]
@@ -563,7 +576,7 @@ xtick={9,94,183,211,289},
     xticklabels={A, B, C, D, E},
 %domain=3:20,
 %samples=200,
-width=18cm,height=7cm,
+width=18cm,height=8cm,
 legend pos=north east,
 ]
 
@@ -582,6 +595,31 @@ legend pos=north east,
 
 \caption{Distribuciones}\label{fig:tablag}
 \end{figure}
+
+
+
+\section{Vagones}
+
+Las tasas relativas al número de vagones y al número de pasajeros se recojen en la tabla \ref{tab:vag}.
+
+
+
+
+\begin{table}[!htp]\centering
+
+%\small
+\begin{tabular}{lc}\toprule
+Concepto & Tasa [\euro] \\\midrule
+Tasa por pasajero & $1.5$\\
+Coste por vagón & $500$\\
+\bottomrule
+\end{tabular}
+
+\caption{Conceptos relativos a vagones y pasajeros}\label{tab:vag}
+\end{table}
+
+
+
 
 
 
