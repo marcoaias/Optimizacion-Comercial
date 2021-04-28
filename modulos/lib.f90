@@ -3,20 +3,6 @@ module lib
 
 contains
 
-    ! Muestra matrices cuadradas (n,n) de reales por pantalla
-  ! DEPRECATED
-  subroutine display_matrix(A,n)
-    implicit none
-    integer, intent(in) :: n
-    real(8), intent(in) :: A(n,n)
-
-    integer :: i
-
-    do i = 1, n
-      print *, A(i,:)
-    end do
-  end subroutine
-
   ! Muestra matrices de reales (m,n) por pantalla
   subroutine show_array(A, m, n)
     implicit none
@@ -31,20 +17,7 @@ contains
 
   end subroutine
 
-  ! Muestra matrizes cuadradas (n,n) de enteros por pantalla
-  ! DEPRECATED
-  subroutine display_integer_matrix(A,n)
-    implicit none
-    integer, intent(in) :: n
-    integer, intent(in) :: A(n,n)
-    integer :: i
-
-    do i = 1, n
-      print *, A(i,:)
-    end do
-  end subroutine
-
-  !   Convierte un entero en una cadena de characteres
+  ! Convierte un entero en una cadena de characteres
   character(len=20) function str(k)
     integer, intent(in) :: k
     write (str, *) k
@@ -52,116 +25,31 @@ contains
   end function str
 
 
-  ! gaussNormal(x) devuelve el valor de la distribución normal Gaussiana para cada x pedida. La distribución es (0,1).
-  ! DEPRECATED
-  function gaussNormal(x) result(f)
+  ! funcion distribución gauss, x, media, desviación, f(x)
+  function gauss(x, mu, sigma) result(f)
     implicit none
-    real(8), intent(in) :: x
-    real(8) :: f
-
-    f = exp(-0.5 * x**2)/(sqrt(2*acos(-1.0)))
-  end function
-
-  !TODO
-  ! funcion distribución gauss, media, desviación, x, f(x)
-  function gauss(mu, sigma, x) result(f)
-    implicit none
-    real(8), intent(in) :: mu, sigma, x
+    real(8), intent(in) :: x, mu, sigma
     real(8) :: f
 
     f = exp(-0.5 * ((x-mu)/sigma)**2)/(sigma*sqrt(2*acos(-1.0)))
   end function
 
 
-  ! f1 es la función a integrar por el método del trapecio en la subrutina trapecio
-  ! DEPRECATED
-  function f1(x)
-    implicit none
-    real(8), intent(in) :: x
-    real(8) :: f1
-
-    f1 = gaussNormal(x)
-  end function
-
-  ! Calcula la integral de la función f1(x) en el intervalo (a,b); realiza n subdivisiones, devuelve el resultado c TODO
-  ! DEPRECATED
-  subroutine trapecio(a,b,c,n)
-    implicit none
-    real(8), intent(in) :: a, b
-    real(8), intent(inout) :: c
-    integer, intent(in) :: n
-
-    real(8) :: s, x, h
-    integer :: i
-
-    ! cálculo del intervalo
-    h = (b-a)/dble(n)
-
-    s = 0d0
-
-    do i = 1, n-1
-      x = a + h*dble(i)
-      ! f1 es la funcion f(x) a integrar
-      ! f1 está definida en este módulo
-      s = s + f1(x)
-    end do
-
-    c = 0.5*h*(f1(a) + f1(b) + 2*s)
-  end subroutine
-
-  ! función f2(x); esta función es la cual se integra según el método de simpson
-  ! DEPRECATED
-  function f2(x)
-    implicit none
-    real(8), intent(in) :: x
-    real(8) :: f2
-
-    f2 = gaussNormal(x)
-  end function
-
-  ! calculo de la integral de f2, f(x), por el método de simpson. límites de integración, número de intervalos, resultado. TODO
-  ! DEPRECATED
-  subroutine simpson(a,b,n,s)
-    implicit none
-    integer, intent(in) :: n
-    real(8), intent(in) :: a, b
-    real(8), intent(inout) :: s
-
-    real(8) :: s1, s2, h, x
-    integer :: i
-
-    h = (b-a)/dble(n)
-
-    s1 = 0d0
-    do i = 1, n-1,2
-      x = a + h*dble(i)
-      s1 = s1 + f2(x)
-    end do
-
-    s2 = 0d0
-    do i = 2, n-2, 2
-      x = a + h*dble(i)
-      s2 = s2 + f2(x)
-    end do
-
-    s = (h/dble(3))*(f2(a) + f2(b) + dble(4)*s1 + dble(2)*s2)
-  end subroutine
-
-
-  ! calcula la función de probabilidad acumulada, según t, para una distribución de gauss TODO
+  ! calcula la función de probabilidad acumulada, según t, para una distribución de gauss
   function probabilidad(t, mu, sigma) result(P)
     implicit none
     real(8), intent(in) :: t, mu, sigma
     real(8) :: P, s
 
-    call integralCDF(mu, t, 1000, s, sigma)
+    call integralCDF(t, mu, sigma, 1000, s)
     P = 0.5 + s
   end function
 
 
   ! Según el método de simpson se integra la probabilidad compuesta en función a mu y sigma
-  ! Función de probabilidad acumulada, CDF TODO
-  subroutine integralCDF(mu,t,n,s,sigma)
+  ! Función de probabilidad acumulada, CDF
+  ! límite de integración t, distribución(mu, sigma), número de intervalos n, solución s
+  subroutine integralCDF(t,mu,sigma,n,s)
     implicit none
     integer, intent(in) :: n
     real(8), intent(in) :: t, mu, sigma
@@ -175,16 +63,16 @@ contains
     s1 = 0d0
     do i = 1, n-1,2
       x = mu + h*dble(i)
-      s1 = s1 + gauss(mu, sigma, x)
+      s1 = s1 + gauss(x, mu, sigma)
     end do
 
     s2 = 0d0
     do i = 2, n-2, 2
       x = mu + h*dble(i)
-      s2 = s2 + gauss(mu, sigma, x)
+      s2 = s2 + gauss(x, mu, sigma)
     end do
 
-    s = (h/dble(3))*(gauss(mu, sigma, mu) + gauss(mu, sigma, t) + dble(4)*s1 + dble(2)*s2)
+    s = (h/dble(3))*(gauss(mu, mu, sigma) + gauss(t, mu, sigma) + dble(4)*s1 + dble(2)*s2)
   end subroutine
 
 
@@ -253,7 +141,7 @@ contains
       do j = 1, 50
         s = A(i+1, 1)/A(i, 4) - 1 + probabilidad(x, A(i,5), A(i,6))
 
-        if ( abs(s) < tol ) then
+        if (abs(s) < tol) then
           v(i) = x
           print *, i, v(i), j
 
@@ -262,7 +150,7 @@ contains
           exit
         end if
 
-        dx = -gauss(A(i,5), A(i,6), x)
+        dx = -gauss(x, A(i,5), A(i,6))
         x = s/dx + x
       end do
     end do
@@ -274,7 +162,7 @@ contains
       ! límite superior de probabilidad de ocupar theta asientos (0.1)
       s = 0.1 - 1 + probabilidad(x, A(filas,5), A(filas,6))
 
-      if ( abs(s) < tol ) then
+      if (abs(s) < tol) then
         v(filas) = x
         print *, "GHOST CLASS"
         print *, filas, v(filas), j
@@ -284,9 +172,9 @@ contains
         exit
       end if
 
-      dx = -gauss(A(filas,5), A(filas,6), x)
+      dx = -gauss(x, A(filas,5), A(filas,6))
       x = s/dx + x
     end do
   end subroutine
-  
+
 end module
