@@ -3,14 +3,12 @@ module lib
 
 contains
 
+    ! Muestra matrices cuadradas (n,n) de reales por pantalla
+  ! DEPRECATED
   subroutine display_matrix(A,n)
-
-    ! Muestra matrices cuadradas de reales por pantalla
-
     implicit none
     integer, intent(in) :: n
     real(8), intent(in) :: A(n,n)
-
 
     integer :: i
 
@@ -19,9 +17,9 @@ contains
     end do
   end subroutine
 
+  ! Muestra matrices de reales (m,n) por pantalla
   subroutine show_array(A, m, n)
     implicit none
-
     integer, intent(in) :: m, n
     real(8), intent(in) :: A(m,n)
 
@@ -33,15 +31,12 @@ contains
 
   end subroutine
 
+  ! Muestra matrizes cuadradas (n,n) de enteros por pantalla
+  ! DEPRECATED
   subroutine display_integer_matrix(A,n)
-
-    ! Muestra matrizes cuadradas de enteros por pantalla
-
     implicit none
     integer, intent(in) :: n
     integer, intent(in) :: A(n,n)
-
-
     integer :: i
 
     do i = 1, n
@@ -49,32 +44,27 @@ contains
     end do
   end subroutine
 
-
+  !   Convierte un entero en una cadena de characteres
   character(len=20) function str(k)
-!   "Convert an integer to string."
     integer, intent(in) :: k
     write (str, *) k
     str = adjustl(str)
   end function str
 
 
+  ! gaussNormal(x) devuelve el valor de la distribución normal Gaussiana para cada x pedida. La distribución es (0,1).
+  ! DEPRECATED
   function gaussNormal(x) result(f)
-
-    ! gaussNormal(x) devuelve el valor de la distribución normal Gaussiana
-    ! para cada x pedida. La distribución es (0,1).
-
     implicit none
     real(8), intent(in) :: x
     real(8) :: f
 
     f = exp(-0.5 * x**2)/(sqrt(2*acos(-1.0)))
-
   end function
 
+  !TODO
+  ! funcion distribución gauss, media, desviación, x, f(x)
   function gauss(mu, sigma, x) result(f)
-
-    ! funcion gauss, media, desviación, x, f(x)
-
     implicit none
     real(8), intent(in) :: mu, sigma, x
     real(8) :: f
@@ -83,22 +73,20 @@ contains
   end function
 
 
+  ! f1 es la función a integrar por el método del trapecio en la subrutina trapecio
+  ! DEPRECATED
   function f1(x)
-
-    ! f1 es la función a integrar por el método del trapecio en la subrutina trapecio
-
     implicit none
-
     real(8), intent(in) :: x
     real(8) :: f1
 
     f1 = gaussNormal(x)
-
   end function
 
+  ! Calcula la integral de la función f1(x) en el intervalo (a,b); realiza n subdivisiones, devuelve el resultado c TODO
+  ! DEPRECATED
   subroutine trapecio(a,b,c,n)
     implicit none
-
     real(8), intent(in) :: a, b
     real(8), intent(inout) :: c
     integer, intent(in) :: n
@@ -113,32 +101,28 @@ contains
 
     do i = 1, n-1
       x = a + h*dble(i)
-
       ! f1 es la funcion f(x) a integrar
       ! f1 está definida en este módulo
       s = s + f1(x)
     end do
 
     c = 0.5*h*(f1(a) + f1(b) + 2*s)
-
   end subroutine
 
+  ! función f2(x); esta función es la cual se integra según el método de simpson
+  ! DEPRECATED
   function f2(x)
     implicit none
-
     real(8), intent(in) :: x
     real(8) :: f2
 
     f2 = gaussNormal(x)
   end function
 
-
+  ! calculo de la integral de f2, f(x), por el método de simpson. límites de integración, número de intervalos, resultado. TODO
+  ! DEPRECATED
   subroutine simpson(a,b,n,s)
-
-    ! calculo de la integral de f2, f(x), por el método de simpson. límites de integración, número de intervalos, resultado.
-
     implicit none
-
     integer, intent(in) :: n
     real(8), intent(in) :: a, b
     real(8), intent(inout) :: s
@@ -161,30 +145,24 @@ contains
     end do
 
     s = (h/dble(3))*(f2(a) + f2(b) + dble(4)*s1 + dble(2)*s2)
-
   end subroutine
 
 
+  ! calcula la función de probabilidad acumulada, según t, para una distribución de gauss TODO
   function probabilidad(t, mu, sigma) result(P)
     implicit none
-
     real(8), intent(in) :: t, mu, sigma
     real(8) :: P, s
 
     call integralCDF(mu, t, 1000, s, sigma)
-
     P = 0.5 + s
-
   end function
 
 
+  ! Según el método de simpson se integra la probabilidad compuesta en función a mu y sigma
+  ! Función de probabilidad acumulada, CDF TODO
   subroutine integralCDF(mu,t,n,s,sigma)
-
-    ! Según el método de simpson se integra la probabilidad compuesta en función a mu y sigma
-    ! Función de probabilidad acumulada, CDF
-
     implicit none
-
     integer, intent(in) :: n
     real(8), intent(in) :: t, mu, sigma
     real(8), intent(inout) :: s
@@ -207,18 +185,15 @@ contains
     end do
 
     s = (h/dble(3))*(gauss(mu, sigma, mu) + gauss(mu, sigma, t) + dble(4)*s1 + dble(2)*s2)
-
   end subroutine
 
 
 
   ! Esta subrutina calcula los valores emsr relevantes, según el algoritmo EMSR-b, desde y hacia la tabla A(filas, 6), ordenada descendentemente en función de las tarifas de las clases.
-
   ! La tabla A() se usará para calcular los niveles de protección para cada clase.
 
   subroutine valores_emsr(A, filas)
     implicit none
-
     integer, intent(in) :: filas
     real(8), intent(inout) :: A(filas, 6)
 
@@ -247,22 +222,17 @@ contains
       end do
 
       A(i, 6) = sqrt(s)
-
-
     end do
   end subroutine
 
 
   ! aplica la regla de Littlewood; compara cada clase al conjunto restante según el algoritmo EMSRb;
-
   ! recibe como parámetros la tabla de los valores emsr calculados en la subrutina valores_emsr, el número de filas (clases) que contiene la tabla, y el vector solución v que contiene los niveles de protección para cada clase comparado con el resto.
-
   ! véase:
   ! https://youtu.be/mZY4CU05PLw
-
+  !TODO print aid
   subroutine proteger (A, filas, v)
     implicit none
-
     integer, intent(in) :: filas
     real(8), intent(in) :: A(filas, 6)
     real(8), intent(inout) :: v(filas)
@@ -271,25 +241,17 @@ contains
     real(8) :: s, x, tol, dx
 
     v = 0.d0
-
+    ! se define la tolerancia
     tol = dble(0.0000000001)
-
-
-
     do i = 1, filas-1
 
       ! solución inicial centrada en mu siempre garantiza convergencia
-
       x = A(i,5)
 
       ! resolución iterativa según la linealización del complementario cdf, quasi método de Newton
 
-      ! solución inicial centrada alrededor de mu, en media desviación estandar.
-
       do j = 1, 50
         s = A(i+1, 1)/A(i, 4) - 1 + probabilidad(x, A(i,5), A(i,6))
-
-        ! print *, "x: ", x, "s: ", s
 
         if ( abs(s) < tol ) then
           v(i) = x
@@ -300,29 +262,17 @@ contains
           exit
         end if
 
-
-
-        ! pendiente negativa ojo TODO
         dx = -gauss(A(i,5), A(i,6), x)
-
-        ! print *, dx
-        ! print *, i,j,x
         x = s/dx + x
-        ! print *, i,j,x
-
       end do
-
     end do
 
 
-    ! Ghost class
-
+    ! Ghost class TODO
     x = A(filas, 5)
-
     do j = 1, 100
+      ! límite superior de probabilidad de ocupar theta asientos (0.1)
       s = 0.1 - 1 + probabilidad(x, A(filas,5), A(filas,6))
-
-      ! print *, "x: ", x, "s: ", s
 
       if ( abs(s) < tol ) then
         v(filas) = x
@@ -334,22 +284,9 @@ contains
         exit
       end if
 
-
-
-      ! pendiente negativa ojo TODO
       dx = -gauss(A(filas,5), A(filas,6), x)
-
-      ! print *, dx
-      ! print *, i,j,x
       x = s/dx + x
-      ! print *, i,j,x
-
     end do
-
-
-
   end subroutine
-
-
-
+  
 end module
