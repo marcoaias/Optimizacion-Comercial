@@ -3,7 +3,7 @@ program main
   implicit none
 
   integer :: n, i, j
-  real(8) :: t, mu, sigma, h, array(251, 2), A(5,6), v(5), B(4,6), tarifas(6,2)
+  real(8) :: t, mu, sigma, h, array(320, 2), A(5,6), v(5), B(4,6), tarifas(6,2)
 
   n = 250
   mu = 0.0
@@ -58,9 +58,14 @@ program main
   print *, "NIVELES DE PROTECCION"
 
   call show_array(v,5, 1)
+
+
+
+  call vagones(A, 5, v, array, 320)
+
   !
   !
-  ! 
+  !
   ! do i = 1, 5
   !   tarifas(i,1) = A(i,1)
   !   tarifas(i,2) = A(i,4)
@@ -114,11 +119,12 @@ program main
 
 
 
-   ! open(1, file = 'data2.dat', status = 'new')
-   ! do i=1,n+1
-   !    write(1,*) array(i,1), array(i,2)
-   ! end do
-   !
-   ! close(1)
+   open(1, file = 'vagones.dat', status = 'new')
+   do i=1,320
+      write(1,*) array(i,1), array(i,2)
+   end do
+
+   close(1)
+
 
 end program

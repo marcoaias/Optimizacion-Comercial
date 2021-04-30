@@ -177,4 +177,58 @@ contains
     end do
   end subroutine
 
+
+  subroutine vagones(A, filas, v, array, n)
+    implicit none
+    integer, intent(in) :: n, filas
+    ! TODO inout
+    real(8), intent(inout) :: A(filas, 6), v(filas)
+    real(8), intent(inout) :: array(n, 2)
+
+    integer :: nplazas
+    integer :: tasavagon
+    real(8) :: tasapax
+
+    integer :: i, clase
+    real(8) :: s
+
+
+    ! TODO
+    v(filas) = dble(321)
+
+
+    nplazas = 80
+    tasavagon = 0
+    tasapax = 0
+
+    clase = 1
+
+    s = 0.d0
+
+    do i = 1, n
+
+      if (i > v(clase)) clase = clase + 1
+
+      if (ceiling(i/dble(nplazas)) - ceiling((i-1)/dble(nplazas)) == 1) then
+        s = s - tasavagon
+      end if
+
+      s = s + A(clase, 1) - tasapax
+
+      array(i,1) = i
+      array(i, 2) = s
+
+      print *, i, s, clase
+
+    end do
+
+
+
+  end subroutine
+
+
+
+
+
+
 end module
