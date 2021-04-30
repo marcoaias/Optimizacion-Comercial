@@ -198,8 +198,8 @@ contains
 
 
     nplazas = 80
-    tasavagon = 0
-    tasapax = 0
+    tasavagon = 500
+    tasapax = 1.5
 
     clase = 1
 

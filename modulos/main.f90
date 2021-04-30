@@ -3,25 +3,25 @@ program main
   implicit none
 
   integer :: n, i, j
-  real(8) :: t, mu, sigma, h, array(320, 2), A(5,6), v(5), B(4,6), tarifas(6,2)
+  real(8) :: t, mu, sigma, h, arrayA(320, 2), arrayB(320, 2), A(5,6), v(5), B(4,6), tarifas(6,2)
 
-  n = 250
-  mu = 0.0
-  sigma = 0.5
+  n = 320
+  mu = 264
+  sigma = 9
 
   h = 1.5*3*2*sigma/dble(n)
 
 
 
-  do i = 0, n
-    t = -3*sigma + i*h + mu
+  do i = 1, n
+    t = i
 
 
 
-    array(i+1, 1) = t
-    array(i+1, 2) = probabilidad(t, mu, sigma)
+    arrayA(i+1, 1) = t
+    arrayA(i+1, 2) = 1 - probabilidad(t, mu, sigma)
 
-    ! print *, i, array(i+1, 1), array(i+1, 2)
+    print *, i, arrayA(i+1, 1), arrayA(i+1, 2)
 
   end do
 
@@ -61,7 +61,7 @@ program main
 
 
 
-  call vagones(A, 5, v, array, 320)
+  call vagones(A, 5, v, arrayB, 320)
 
   !
   !
@@ -87,16 +87,16 @@ program main
   !
   !
   !
-  !   array(i+1, 1) = t
-  !   array(i+1, 2) = -tarifas(j+1,1)/tarifas(j,2) + 1 - probabilidad(t, mu, sigma) !gauss(mu,sigma,t)!probabilidad(t, mu, sigma)
+  !   arrayA(i+1, 1) = t
+  !   arrayA(i+1, 2) = -tarifas(j+1,1)/tarifas(j,2) + 1 - probabilidad(t, mu, sigma) !gauss(mu,sigma,t)!probabilidad(t, mu, sigma)
   !
-  !   ! print *, i, array(i+1, 1), array(i+1, 2)
+  !   ! print *, i, arrayA(i+1, 1), arrayA(i+1, 2)
   !
   ! end do
   !
   ! open(j, file = "data"//trim(str(j+10))//".dat", status = 'new')
   ! do i=1,n+1
-  !    write(j,*) array(i,1), array(i,2)
+  !    write(j,*) arrayA(i,1), arrayA(i,2)
   ! end do
   !
   ! close(j)
@@ -117,11 +117,15 @@ program main
 
   ! output data into a file
 
+  do i = 1, n
+    arrayB(i, 2) = arrayB(i,2)**(1/arrayA(i,2))!arrayB(i,2)*(arrayA(i,2)**(0.2))
+  end do
 
 
-   open(1, file = 'vagones.dat', status = 'new')
+
+   open(1, file = 'vprob3.dat', status = 'new')
    do i=1,320
-      write(1,*) array(i,1), array(i,2)
+      write(1,*) arrayB(i,1), arrayB(i,2)
    end do
 
    close(1)

@@ -35,6 +35,11 @@
 \usepackage{hyperref}
 
 
+\definecolor{ForestGreen}{RGB}{0,155,85}
+\definecolor{RoyalBlue}{RGB}{0,113,188}
+
+
+
 % \newcommand{\hlc}[2][yellow]{ {\sethlcolor{#1} \hl{#2}} }
 
 
@@ -495,7 +500,7 @@ xmax=350,
 xmin=0,
 % ticks=none,
 xtick={9,94,183,211,289, 240,320},
-    xticklabels={A, B, C, D, E, {\tiny 3er vg. completo}, {\tiny 4o vg. completo}},
+    xticklabels={A, B, C, D, E*, {\tiny 3er vg. completo}, {\tiny 4o vg. completo}},
 %domain=3:20,
 %samples=200,
 width=18cm,height=8cm,
@@ -580,7 +585,7 @@ xmax=350,
 xmin=-14,
 % ticks=none,
 xtick={9,94,183,211,289},
-    xticklabels={A, B, C, D, E},
+    xticklabels={A, B, C, D, E*},
 %domain=3:20,
 %samples=200,
 width=18cm,height=8cm,
@@ -661,7 +666,7 @@ xmax=350,
 xmin=0,
 % ticks=none,
 xtick={9,94,183,211,289, 80, 160, 240,320},
-    xticklabels={A, B, C, D, E, {\tiny 1er}, {\tiny 2o}, {\tiny 3er}, {\tiny 4o vg. completo}},
+    xticklabels={A, B, C, D, E*, {\tiny 1er}, {\tiny 2o}, {\tiny 3er}, {\tiny 4o vg. completo}},
 %domain=3:20,
 %samples=200,
 width=18cm,height=8cm,
@@ -677,7 +682,7 @@ legend pos=north west,
 \addlegendentry{$(1.5, 2000)$}
 \addplot [olive, thick] table{data/vagones2.dat};
 \addlegendentry{$(55, 500)$}
-\addplot [pink, thick] table{data/vagones3.dat};
+\addplot [purple, thick] table{data/vagones3.dat};
 \addlegendentry{$(1.5, 5000)$}
 \addplot [violet, thick] table{data/vagones4.dat};
 \addlegendentry{$(0, 0)$}
@@ -702,6 +707,92 @@ legend pos=north west,
 
 
 \caption{Distribución de ingresos en función del número de pasajeros y para distintas tasas}\label{fig:ingresos}
+\end{figure}
+
+
+
+
+
+\begin{figure}
+\centering
+
+\makebox[\textwidth]{
+\begin{tikzpicture}
+\begin{axis} [
+% title=Tabla,
+% axis lines = left,
+% axis y line*=left,
+legend style={nodes={scale=0.5, transform shape}},
+xlabel={$\theta$},
+ylabel=$\delta(\theta)$,
+% ymax=0.048,
+% ymin=-300,
+xmax=350,
+xmin=0,
+% ticks=none,
+xtick={9,94,183,211,289, 80, 160, 240,320},
+    xticklabels={A, B, C, D, E*, {\tiny 1er}, {\tiny 2o}, {\tiny 3er}, {\tiny 4o vg. completo}},
+%domain=3:20,
+%samples=200,
+width=18cm,height=8cm,
+legend pos=north west,
+]
+
+
+\addplot [blue, ultra thick] table{data/vagones0.dat};
+\addlegendentry{$(1.5, 500)$}
+
+
+
+
+\addplot[dashed,thin, red] coordinates {(9,0) (9,25000)};
+\addplot[dashed,thin, red] coordinates {(94,0) (94,25000)};
+\addplot[dashed,thin, red] coordinates {(183,0) (183,25000)};
+\addplot[dashed,thin, red] coordinates {(211,0) (211,25000)};
+\addplot[dashed,thin, red] coordinates {(289,0) (289,25000)};
+\addplot[densely dotted, darkgray] coordinates {(80,0) (80,25000)};
+\addplot[densely dotted, darkgray] coordinates {(160,0) (160,25000)};
+\addplot[densely dotted, darkgray] coordinates {(240,0) (240,25000)};
+\addplot[densely dotted, darkgray] coordinates {(320,0) (320,25000)};
+
+\end{axis}
+
+
+\begin{axis} [
+% axis lines = left,
+axis y line*=right,
+legend style={nodes={scale=0.5, transform shape}},
+% xlabel={$\theta$},
+ylabel=$1 - P(\theta)$,
+ymax=1.19,
+ymin=0,
+xmax=350,
+xmin=0,
+% ticks=none,
+xtick={},
+    xticklabels={},
+% domain=0:400,
+%samples=200,
+width=18cm,height=8cm,
+legend pos=north east,
+grid=none,
+]
+\addplot [red, densely dashdotted, thick, domain=0:200] {1};
+\addplot [red, ultra thick] table{vprob0.dat};
+\addplot [ForestGreen, densely dashdotted, thick] table{vprob1.dat};
+
+
+
+
+
+\end{axis}
+
+
+\end{tikzpicture}
+  }
+
+
+\caption{3er y 4o vagón}\label{fig:distvag}
 \end{figure}
 
 
