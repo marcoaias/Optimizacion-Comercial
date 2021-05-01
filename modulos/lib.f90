@@ -178,19 +178,19 @@ contains
   end subroutine
 
 
-  subroutine vagones(A, filas, v, array, n)
+  subroutine vagones(A, filas, v, array, n, prob)
     implicit none
     integer, intent(in) :: n, filas
     ! TODO inout
     real(8), intent(inout) :: A(filas, 6), v(filas)
-    real(8), intent(inout) :: array(n, 2)
+    real(8), intent(inout) :: array(n, 2), prob(n,2)
 
     integer :: nplazas
     integer :: tasavagon
     real(8) :: tasapax
 
     integer :: i, clase
-    real(8) :: s
+    real(8) :: s, temp
 
 
     ! TODO
@@ -213,7 +213,11 @@ contains
         s = s - tasavagon
       end if
 
-      s = s + A(clase, 1) - tasapax
+      temp = A(clase,1) - tasapax
+      print*, temp
+      temp = temp*prob(i, 2)
+      print*, temp
+      s = s + temp !A(clase, 1) - tasapax
 
       array(i,1) = i
       array(i, 2) = s

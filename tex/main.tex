@@ -403,7 +403,7 @@ legend pos=north east,
 Ha de encontrarse un valor $\theta_i$ para cada conjunto de clase, que representa el número de asientos protegidos, para el cuál la probabilidad de que tantos sean ocupados sea igual a la razón de tarifas.
 
 \begin{align}
-g(\theta) = \dfrac{1}{2} - \int_{\mu_i}^{\theta_i} \underset{(\overline{\mu}_i, \, \overline{\sigma}_i)}{f(x)}\dif x - \dfrac{\text{tarifa}_{i + 1}}{\text{tmp}_i}  = 0 \label{eq:gtheta}
+g(\theta) = \dfrac{1}{2} - \int_{\mu_i}^{\theta} \underset{(\overline{\mu}_i, \, \overline{\sigma}_i)}{f(x)}\dif x - \dfrac{\text{tarifa}_{i + 1}}{\text{tmp}_i}  = 0 \label{eq:gtheta}
 \end{align}
 
 Se puede resolver por linealización, i.e. Newton.\\
@@ -643,7 +643,11 @@ Para cada valor de $\theta$ se atribuye un incremento de beneficio relativo al t
 
 
 \begin{align}
-\delta(\theta) = \sum_{k=1}^\theta \text{Tarifa}_{\left\{\min(i) \, \mid \, k \, < \, \text{Protección}_i^*\right \}}- \left(\left\lceil\dfrac{\theta}{n_{\text{plazas}}}\right\rceil \cdot \frac{\text{Coste}}{\text{vagón}} + \theta\cdot\frac{\text{Tasa}}{\text{pasajero}} \right)
+\delta(\theta) = \sum_{k=1}^\theta \underset{\left\{\min(i) \, \mid \, k \, < \, \theta_i^*\right \}}{\text{Tarifa}_i} - \left(\left\lceil\dfrac{\theta}{n_{\text{plazas}}}\right\rceil \cdot \frac{\text{Coste}}{\text{vagón}} + \theta\cdot\frac{\text{Tasa}}{\text{pasajero}} \right)
+\end{align}
+
+\begin{align}
+\delta(\theta)^* = \sum_{k = 1}^\theta \underset{\left\{\min(i) \, \mid \, k \, < \, \theta_i^*\right \}}{\left[\left(\text{Tarifa}_i -\frac{\text{Tasa}}{\text{pasajero}}\right)\left(1 - \underset{(\overline{\mu}_i, \, \overline{\sigma}_i)}{P(\theta)}\right)\right]} - \left\lceil\dfrac{\theta}{n_{\text{plazas}}}\right\rceil \frac{\text{Coste}}{\text{vagón}}
 \end{align}
 
 
@@ -721,10 +725,11 @@ legend pos=north west,
 \begin{axis} [
 % title=Tabla,
 % axis lines = left,
-% axis y line*=left,
+axis y line*=left,
+axis x line*=bottom,
 legend style={nodes={scale=0.5, transform shape}},
 xlabel={$\theta$},
-ylabel=$\delta(\theta)$,
+ylabel=$\delta(\theta)^*$,
 % ymax=0.048,
 % ymin=-300,
 xmax=350,
@@ -735,12 +740,20 @@ xtick={9,94,183,211,289, 80, 160, 240,320},
 %domain=3:20,
 %samples=200,
 width=18cm,height=8cm,
-legend pos=north west,
+legend pos=south west,
 ]
 
+\addplot [blue, ultra thick, dashdotted] table{data/vagones0.dat};
 
-\addplot [blue, ultra thick] table{data/vagones0.dat};
-\addlegendentry{$(1.5, 500)$}
+\addplot [violet, ultra thick] table{data/vprob2.dat};
+
+
+\addplot [RoyalBlue, ultra thick] table{data/vprob4.dat};
+
+
+% \addlegendentry{$(1.5, 500)$}
+
+% \addlegendentry{$(1.5, 500)$}
 
 
 
@@ -761,11 +774,12 @@ legend pos=north west,
 \begin{axis} [
 % axis lines = left,
 axis y line*=right,
+axis x line*=top,
 legend style={nodes={scale=0.5, transform shape}},
 % xlabel={$\theta$},
 ylabel=$1 - P(\theta)$,
-ymax=1.19,
-ymin=0,
+% ymax=1.19,
+% ymin=0,
 xmax=350,
 xmin=0,
 % ticks=none,
@@ -778,12 +792,10 @@ legend pos=north east,
 grid=none,
 ]
 \addplot [red, densely dashdotted, thick, domain=0:200] {1};
-\addplot [red, ultra thick] table{vprob0.dat};
-\addplot [ForestGreen, densely dashdotted, thick] table{vprob1.dat};
+\addplot [red, ultra thick] table{data/vprob0.dat};
+% \addplot [ForestGreen, densely dashdotted, thick] table{data/vprob1.dat};
 
-
-
-
+\addplot [ForestGreen, densely dashdotted, ultra thick] table{data/vprob3.dat};
 
 \end{axis}
 
@@ -792,7 +804,7 @@ grid=none,
   }
 
 
-\caption{3er y 4o vagón}\label{fig:distvag}
+\caption{Distintas funciones $\delta$, según distintas probabilidades de demanda}\label{fig:distvag}
 \end{figure}
 
 

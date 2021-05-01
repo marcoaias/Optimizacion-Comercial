@@ -2,28 +2,28 @@ program main
   use lib
   implicit none
 
-  integer :: n, i, j
+  integer :: n, i, j, clase
   real(8) :: t, mu, sigma, h, arrayA(320, 2), arrayB(320, 2), A(5,6), v(5), B(4,6), tarifas(6,2)
 
   n = 320
   mu = 264
-  sigma = 9
+  sigma = 20
 
   h = 1.5*3*2*sigma/dble(n)
 
 
 
-  do i = 1, n
-    t = i
-
-
-
-    arrayA(i+1, 1) = t
-    arrayA(i+1, 2) = 1 - probabilidad(t, mu, sigma)
-
-    print *, i, arrayA(i+1, 1), arrayA(i+1, 2)
-
-  end do
+  ! do i = 1, n
+  !   t = i
+  !
+  !
+  !
+  !   arrayA(i+1, 1) = t
+  !   arrayA(i+1, 2) = 1 - probabilidad(t, mu, sigma)
+  !
+  !   print *, i, arrayA(i+1, 1), arrayA(i+1, 2)
+  !
+  ! end do
 
   ! datos de la tabla de valores EMSR b
 
@@ -60,8 +60,28 @@ program main
   call show_array(v,5, 1)
 
 
+  v(5) = dble(321)
+  clase = 1
 
-  call vagones(A, 5, v, arrayB, 320)
+  do i = 1, n
+    if (i > v(clase)) clase = clase + 1
+    t = i
+
+    mu = A(clase, 5)
+    sigma = A(clase, 6)
+
+    arrayA(i+1, 1) = t
+    arrayA(i+1, 2) = 1 - probabilidad(t, mu, sigma)
+
+    print *, i, arrayA(i+1, 1), arrayA(i+1, 2)
+
+  end do
+
+
+
+  arrayA(1,2) = 0.92
+
+  call vagones(A, 5, v, arrayB, 320, arrayA)
 
   !
   !
@@ -117,13 +137,16 @@ program main
 
   ! output data into a file
 
-  do i = 1, n
-    arrayB(i, 2) = arrayB(i,2)**(1/arrayA(i,2))!arrayB(i,2)*(arrayA(i,2)**(0.2))
-  end do
+  ! do i = 1, n
+  !   arrayB(i, 2) = arrayB(i,2)**(1/arrayA(i,2))!arrayB(i,2)*(arrayA(i,2)**(0.2))
+  ! end do
 
 
 
-   open(1, file = 'vprob3.dat', status = 'new')
+
+
+
+   open(1, file = 'vprob4.dat', status = 'new')
    do i=1,320
       write(1,*) arrayB(i,1), arrayB(i,2)
    end do
