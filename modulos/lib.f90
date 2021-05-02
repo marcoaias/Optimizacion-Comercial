@@ -12,7 +12,7 @@ contains
     integer :: i
 
     do i = 1, m
-      print *, A(i,:)
+      !print *, A(i,:)
     end do
 
   end subroutine
@@ -118,7 +118,7 @@ contains
   ! recibe como parámetros la tabla de los valores emsr calculados en la subrutina valores_emsr, el número de filas (clases) que contiene la tabla, y el vector solución v que contiene los niveles de protección para cada clase comparado con el resto.
   ! véase:
   ! https://youtu.be/mZY4CU05PLw
-  !TODO print aid
+  !TODO !print aid
   subroutine proteger (A, filas, v)
     implicit none
     integer, intent(in) :: filas
@@ -143,10 +143,10 @@ contains
 
         if (abs(s) < tol) then
           v(i) = x
-          print *, i, v(i), j
+          !print *, i, v(i), j
 
-          print *, A(i+1, 1)/A(i, 4)
-          print *, 1 - probabilidad(v(i), A(i,5), A(i,6))
+          !print *, A(i+1, 1)/A(i, 4)
+          !print *, 1 - probabilidad(v(i), A(i,5), A(i,6))
           exit
         end if
 
@@ -164,11 +164,11 @@ contains
 
       if (abs(s) < tol) then
         v(filas) = x
-        print *, "GHOST CLASS"
-        print *, filas, v(filas), j
+        !print *, "GHOST CLASS"
+        !print *, filas, v(filas), j
 
-        print *, 0.1
-        print *, 1 - probabilidad(v(filas), A(filas,5), A(filas,6))
+        !print *, 0.1
+        !print *, 1 - probabilidad(v(filas), A(filas,5), A(filas,6))
         exit
       end if
 
@@ -176,5 +176,63 @@ contains
       x = s/dx + x
     end do
   end subroutine
+
+
+  subroutine vagones(A, filas, v, array, n, prob)
+    implicit none
+    integer, intent(in) :: n, filas
+    ! TODO inout
+    real(8), intent(inout) :: A(filas, 6), v(filas)
+    real(8), intent(inout) :: array(n, 2), prob(n,2)
+
+    integer :: nplazas
+    integer :: tasavagon
+    real(8) :: tasapax
+
+    integer :: i, clase
+    real(8) :: s, temp
+
+
+    ! TODO
+    v(filas) = dble(321)
+
+
+    nplazas = 80
+    tasavagon = 0
+    tasapax = 0
+
+    clase = 1
+
+    s = 0.d0
+
+    do i = 1, n
+
+      if (i > v(clase)) clase = clase + 1
+
+      if (ceiling(i/dble(nplazas)) - ceiling((i-1)/dble(nplazas)) == 1) then
+        s = s - tasavagon
+      end if
+
+      temp = A(clase,1) - tasapax
+      !print*, temp
+      temp = temp*prob(i, 2)
+      !print*, temp
+      s = s + temp !A(clase, 1) - tasapax
+
+      array(i,1) = i
+      array(i, 2) = s
+
+      !print *, i, s, clase
+
+    end do
+
+
+
+  end subroutine
+
+
+
+
+
 
 end module
