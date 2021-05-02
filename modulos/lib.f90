@@ -12,7 +12,7 @@ contains
     integer :: i
 
     do i = 1, m
-      print *, A(i,:)
+      !print *, A(i,:)
     end do
 
   end subroutine
@@ -118,7 +118,7 @@ contains
   ! recibe como parámetros la tabla de los valores emsr calculados en la subrutina valores_emsr, el número de filas (clases) que contiene la tabla, y el vector solución v que contiene los niveles de protección para cada clase comparado con el resto.
   ! véase:
   ! https://youtu.be/mZY4CU05PLw
-  !TODO print aid
+  !TODO !print aid
   subroutine proteger (A, filas, v)
     implicit none
     integer, intent(in) :: filas
@@ -143,10 +143,10 @@ contains
 
         if (abs(s) < tol) then
           v(i) = x
-          print *, i, v(i), j
+          !print *, i, v(i), j
 
-          print *, A(i+1, 1)/A(i, 4)
-          print *, 1 - probabilidad(v(i), A(i,5), A(i,6))
+          !print *, A(i+1, 1)/A(i, 4)
+          !print *, 1 - probabilidad(v(i), A(i,5), A(i,6))
           exit
         end if
 
@@ -164,11 +164,11 @@ contains
 
       if (abs(s) < tol) then
         v(filas) = x
-        print *, "GHOST CLASS"
-        print *, filas, v(filas), j
+        !print *, "GHOST CLASS"
+        !print *, filas, v(filas), j
 
-        print *, 0.1
-        print *, 1 - probabilidad(v(filas), A(filas,5), A(filas,6))
+        !print *, 0.1
+        !print *, 1 - probabilidad(v(filas), A(filas,5), A(filas,6))
         exit
       end if
 
@@ -198,8 +198,8 @@ contains
 
 
     nplazas = 80
-    tasavagon = 500
-    tasapax = 1.5
+    tasavagon = 0
+    tasapax = 0
 
     clase = 1
 
@@ -214,15 +214,15 @@ contains
       end if
 
       temp = A(clase,1) - tasapax
-      print*, temp
+      !print*, temp
       temp = temp*prob(i, 2)
-      print*, temp
+      !print*, temp
       s = s + temp !A(clase, 1) - tasapax
 
       array(i,1) = i
       array(i, 2) = s
 
-      print *, i, s, clase
+      !print *, i, s, clase
 
     end do
 

@@ -489,18 +489,19 @@ E$_5$ & 40 & 60 &9 & \hlc[cyan]{ (99) }   & \hlc[cyan]{ (264) } & \hlc[cyan]{ (2
 \begin{tikzpicture}
 \begin{axis} [
 % title=Tabla,
-axis lines = left,
+% axis lines = left,
 axis y line*=left,
+axis x line*=bottom,
 legend style={nodes={scale=0.5, transform shape}},
 xlabel={$\theta$},
 ylabel=$f(\theta)_i$,
 ymax=0.048,
-%ymin=5,
+ymin=0,
 xmax=350,
 xmin=0,
 % ticks=none,
-xtick={9,94,183,211,289, 240,320},
-    xticklabels={A, B, C, D, E*, {\tiny 3er vg. completo}, {\tiny 4o vg. completo}},
+xtick={9,94,183,211,289},
+    xticklabels={A, B, C, D, E*},
 %domain=3:20,
 %samples=200,
 width=18cm,height=8cm,
@@ -519,10 +520,7 @@ legend pos=north east,
 \addplot[dashed,thin, red] coordinates {(183,0) (183,1)};
 \addplot[dashed,thin, red] coordinates {(211,0) (211,1)};
 \addplot[dashed,thin, red] coordinates {(289,0) (289,1)};
-\addplot[densely dotted, ultra thick, darkgray] coordinates {(80,0) (80,1)};
-\addplot[densely dotted, ultra thick, darkgray] coordinates {(160,0) (160,1)};
-\addplot[densely dotted, ultra thick, darkgray] coordinates {(240,0) (240,1)};
-\addplot[densely dotted, ultra thick, darkgray] coordinates {(320,0) (320,1)};
+
 
 \end{axis}
 
@@ -530,6 +528,7 @@ legend pos=north east,
 \begin{axis} [
 % axis lines = left,
 axis y line*=right,
+axis x line*=top,
 legend style={nodes={scale=0.5, transform shape}},
 % xlabel={$\theta$},
 ylabel=tarifa$_i$,
@@ -636,18 +635,18 @@ Coste por vagón & $500$\\
 
 Sea la manera en la que se llenen los vagones, desde la clase más alta a la más baja, tal que no afecta a la demanda esperada ni a los niveles de protección.\\
 
-Se define una función de coste y beneficio, $\delta(\theta)$, la cuál recoge el beneficio neto en función del número de pasajeros $\theta$ y conversamente, del número de vagones aplicando las tasas asociadas.\\
+Se define una función de coste y beneficio, $\gamma(\theta)$, la cuál recoge el beneficio neto en función del número de pasajeros $\theta$ y conversamente, del número de vagones aplicando las tasas asociadas.\\
 
 
 Para cada valor de $\theta$ se atribuye un incremento de beneficio relativo al tipo de intervalo en el que se encuentra. Véase la figura \ref{fig:ingresos} y la tabla \ref{tab:emsrpre}. i.e. si $0 < \theta < A$ el beneficio a sumar por 1 pasajero extra corresponde a la tarifa A (180), menos la tasa de pasajeros. En total, para cada vagón se añade su tasa.
 
 
 \begin{align}
-\delta(\theta) = \sum_{k=1}^\theta \underset{\left\{\min(i) \, \mid \, k \, < \, \theta_i^*\right \}}{\text{Tarifa}_i} - \left(\left\lceil\dfrac{\theta}{n_{\text{plazas}}}\right\rceil \cdot \frac{\text{Coste}}{\text{vagón}} + \theta\cdot\frac{\text{Tasa}}{\text{pasajero}} \right)
+\gamma(\theta) = \sum_{k=1}^\theta \underset{\left\{\min(i) \, \mid \, k \, < \, \theta_i^*\right \}}{\text{Tarifa}_i} - \left(\left\lceil\dfrac{\theta}{n_{\text{plazas}}}\right\rceil  \frac{\text{Coste}}{\text{vagón}} + \theta\frac{\text{Tasa}}{\text{pasajero}} \right) \label{eq:delta}
 \end{align}
 
 \begin{align}
-\delta(\theta)^* = \sum_{k = 1}^\theta \underset{\left\{\min(i) \, \mid \, k \, < \, \theta_i^*\right \}}{\left[\left(\text{Tarifa}_i -\frac{\text{Tasa}}{\text{pasajero}}\right)\left(1 - \underset{(\overline{\mu}_i, \, \overline{\sigma}_i)}{P(\theta)}\right)\right]} - \left\lceil\dfrac{\theta}{n_{\text{plazas}}}\right\rceil \frac{\text{Coste}}{\text{vagón}}
+\delta(\theta) = \sum_{k = 1}^\theta \underset{\left\{\min(i) \, \mid \, k \, < \, \theta_i^*\right \}}{\left[\left(\text{Tarifa}_i -\frac{\text{Tasa}}{\text{pasajero}}\right)\left(1 - \underset{(\overline{\mu}_i, \, \sigma_i)}{P(\theta)}\right)\right]} - \left\lceil\dfrac{\theta}{n_{\text{plazas}}}\right\rceil \frac{\text{Coste}}{\text{vagón}} \label{eq:deltastar}
 \end{align}
 
 
@@ -663,11 +662,11 @@ Para cada valor de $\theta$ se atribuye un incremento de beneficio relativo al t
 % axis y line*=left,
 legend style={nodes={scale=0.5, transform shape}},
 xlabel={$\theta$},
-ylabel=$\delta(\theta)$,
+ylabel=$\gamma(\theta)$,
 % ymax=0.048,
 %ymin=5,
-xmax=350,
-xmin=0,
+% xmax=350,
+% xmin=0,
 % ticks=none,
 xtick={9,94,183,211,289, 80, 160, 240,320},
     xticklabels={A, B, C, D, E*, {\tiny 1er}, {\tiny 2o}, {\tiny 3er}, {\tiny 4o vg. completo}},
@@ -729,11 +728,11 @@ axis y line*=left,
 axis x line*=bottom,
 legend style={nodes={scale=0.5, transform shape}},
 xlabel={$\theta$},
-ylabel=$\delta(\theta)^*$,
+ylabel=$\gamma(\theta)^{**}$,
 % ymax=0.048,
-% ymin=-300,
-xmax=350,
-xmin=0,
+% ymin=12000,
+% xmax=350,
+% xmin=0,
 % ticks=none,
 xtick={9,94,183,211,289, 80, 160, 240,320},
     xticklabels={A, B, C, D, E*, {\tiny 1er}, {\tiny 2o}, {\tiny 3er}, {\tiny 4o vg. completo}},
@@ -750,6 +749,8 @@ legend pos=south west,
 
 \addplot [RoyalBlue, ultra thick] table{data/vprob4.dat};
 
+\addplot [magenta, densely dashdotted, thick] table{data/vprob5.dat};
+
 
 % \addlegendentry{$(1.5, 500)$}
 
@@ -758,11 +759,11 @@ legend pos=south west,
 
 
 
-\addplot[dashed,thin, red] coordinates {(9,0) (9,25000)};
-\addplot[dashed,thin, red] coordinates {(94,0) (94,25000)};
-\addplot[dashed,thin, red] coordinates {(183,0) (183,25000)};
-\addplot[dashed,thin, red] coordinates {(211,0) (211,25000)};
-\addplot[dashed,thin, red] coordinates {(289,0) (289,25000)};
+\addplot[dashed, ultra thin, red] coordinates {(9,0) (9,25000)};
+\addplot[dashed, ultra thin, red] coordinates {(94,0) (94,25000)};
+\addplot[dashed, ultra thin, red] coordinates {(183,0) (183,25000)};
+\addplot[dashed, ultra thin, red] coordinates {(211,0) (211,25000)};
+\addplot[dashed, ultra thin, red] coordinates {(289,0) (289,25000)};
 \addplot[densely dotted, darkgray] coordinates {(80,0) (80,25000)};
 \addplot[densely dotted, darkgray] coordinates {(160,0) (160,25000)};
 \addplot[densely dotted, darkgray] coordinates {(240,0) (240,25000)};
@@ -780,8 +781,8 @@ legend style={nodes={scale=0.5, transform shape}},
 ylabel=$1 - P(\theta)$,
 % ymax=1.19,
 % ymin=0,
-xmax=350,
-xmin=0,
+% xmax=350,
+% xmin=0,
 % ticks=none,
 xtick={},
     xticklabels={},
@@ -791,11 +792,15 @@ width=18cm,height=8cm,
 legend pos=north east,
 grid=none,
 ]
-\addplot [red, densely dashdotted, thick, domain=0:200] {1};
+\addplot [red, ultra thick, domain=0:200] {1};
 \addplot [red, ultra thick] table{data/vprob0.dat};
 % \addplot [ForestGreen, densely dashdotted, thick] table{data/vprob1.dat};
 
-\addplot [ForestGreen, densely dashdotted, ultra thick] table{data/vprob3.dat};
+\addplot [yellow, densely dashdotted, ultra thick] table{data/vprob3.dat};
+
+\addplot [ForestGreen, densely dashdotted, ultra thick] table{data/vprob6.dat};
+
+
 
 \end{axis}
 
@@ -804,12 +809,121 @@ grid=none,
   }
 
 
-\caption{Distintas funciones $\delta$, según distintas probabilidades de demanda}\label{fig:distvag}
+\caption{$\delta(\theta)$, según distintas funciones de probabilidad de demanda}\label{fig:distvag}
 \end{figure}
 
 
 
 
+
+
+
+\begin{figure}
+\centering
+
+\makebox[\textwidth]{
+\begin{tikzpicture}
+\begin{axis} [
+% title=Tabla,
+% axis lines = middle,
+axis y line*=left,
+axis x line*=bottom,
+legend style={nodes={scale=0.5, transform shape}},
+xlabel={$\theta$},
+ylabel=$\delta(\theta)$,
+% ymax=0.048,
+%ymin=5,
+% xmax=350,
+% xmin=0,
+% ticks=none,
+xtick={9,94,183,211,289, 80, 160, 240,320},
+    xticklabels={A, B, C, D, E*, {\tiny 1er}, {\tiny 2o}, {\tiny 3er}, {\tiny 4o vg. completo}},
+%domain=3:20,
+%samples=200,
+width=18cm,height=8cm,
+legend pos=south west,
+]
+
+
+
+
+\addplot [blue, ultra thick] table{data/vprob5.dat};
+\addlegendentry{$(1.5, 500)$}
+\addplot [teal, thick] table{data/delta1.dat};
+\addlegendentry{$(1.5, 2000)$}
+\addplot [olive, thick] table{data/delta2.dat};
+\addlegendentry{$(55, 500)$}
+\addplot [purple, thick] table{data/delta3.dat};
+\addlegendentry{$(1.5, 5000)$}
+\addplot [violet, thick] table{data/delta4.dat};
+\addlegendentry{$(0, 0)$}
+
+
+\addplot[dashed,thin, red] coordinates {(9,0) (9,25000)};
+\addplot[dashed,thin, red] coordinates {(94,0) (94,25000)};
+\addplot[dashed,thin, red] coordinates {(183,0) (183,25000)};
+\addplot[dashed,thin, red] coordinates {(211,0) (211,25000)};
+\addplot[dashed,thin, red] coordinates {(289,0) (289,25000)};
+\addplot[densely dotted, darkgray] coordinates {(80,0) (80,25000)};
+\addplot[densely dotted, darkgray] coordinates {(160,0) (160,25000)};
+\addplot[densely dotted, darkgray] coordinates {(240,0) (240,25000)};
+\addplot[densely dotted, darkgray] coordinates {(320,0) (320,25000)};
+
+\end{axis}
+
+\begin{axis} [
+% axis lines = left,
+axis y line*=right,
+axis x line*=top,
+legend style={nodes={scale=0.5, transform shape}},
+% xlabel={$\theta$},
+ylabel=$1 - P(\theta)$,
+% ymax=1.19,
+% ymin=0,
+% xmax=350,
+% xmin=0,
+% ticks=none,
+xtick={},
+    xticklabels={},
+% domain=0:400,
+%samples=200,
+width=18cm,height=8cm,
+legend pos=north east,
+grid=none,
+]
+\addplot [red, ultra thick, domain=0:200] {1};
+\addplot [red, ultra thick] table{data/vprob0.dat};
+% \addplot [ForestGreen, densely dashdotted, thick] table{data/vprob1.dat};
+
+% \addplot [yellow, densely dashdotted, ultra thick] table{data/vprob3.dat};
+
+\addplot [ForestGreen, densely dashdotted, ultra thick] table{data/vprob6.dat};
+
+
+
+\end{axis}
+
+
+
+\end{tikzpicture}
+  }
+
+
+\caption{$\delta(\theta)$ según distintas tasas}\label{fig:deltas}
+\end{figure}
+
+
+
+Similar a la distribución de ingresos según \eqref{eq:delta}, se pueden designar variaciones, como $\delta(\theta)$ \eqref{eq:deltastar}. Varias implementaciones se pueden ver en la figura \nolinebreak \ref{fig:distvag}.\\
+
+La función $\delta(\theta)$ es una medida del ingreso esperado ponderado según la probabilidad para cada asiento. La probabilidad, las tasas, y las tarifas están delimitadas por los niveles de protección y corresponden individualmente a cada clase determinada por estos niveles.\\
+
+Entonces el algoritmo aquí propuesto para determinar el número óptimo de vagones consiste en encontrar un valor máximo para la función $\delta(\theta)$, tal que la probabilidad para que $\theta^*$ asientos sean ocupados o más, sea superior a $0.5$. Véase en la figura \ref{fig:deltas}.
+
+
+\begin{align}
+N_{\text{vagones}} = \left\lceil\dfrac{\theta^*}{n_{\text{plazas}}}\right\rceil \, \mid \, \theta^* \, \mid \, \delta(\theta^*) > \delta(\theta) \,\, \& \,\, 1 - \underset{(\overline{\mu}_n , \, \overline{\sigma}_n)}{P(\theta^*)} > \dfrac{1}{2}
+\end{align}
 
 
 

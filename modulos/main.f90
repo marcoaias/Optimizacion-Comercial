@@ -21,7 +21,7 @@ program main
   !   arrayA(i+1, 1) = t
   !   arrayA(i+1, 2) = 1 - probabilidad(t, mu, sigma)
   !
-  !   print *, i, arrayA(i+1, 1), arrayA(i+1, 2)
+  !   !print *, i, arrayA(i+1, 1), arrayA(i+1, 2)
   !
   ! end do
 
@@ -51,11 +51,11 @@ program main
   call proteger(A,5,v)
 
 
-  print *, "MATRIZ VALORES EMSR: "
+  !print *, "MATRIZ VALORES EMSR: "
 
   call show_array(A, 5, 6)
 
-  print *, "NIVELES DE PROTECCION"
+  !print *, "NIVELES DE PROTECCION"
 
   call show_array(v,5, 1)
 
@@ -68,18 +68,18 @@ program main
     t = i
 
     mu = A(clase, 5)
-    sigma = A(clase, 6)
+    sigma = A(clase, 3)
 
-    arrayA(i+1, 1) = t
-    arrayA(i+1, 2) = 1 - probabilidad(t, mu, sigma)
+    arrayA(i, 1) = t
+    arrayA(i, 2) = 1 - probabilidad(t, mu, sigma)
 
-    print *, i, arrayA(i+1, 1), arrayA(i+1, 2)
+    !print *, i, arrayA(i+1, 1), arrayA(i+1, 2)
 
   end do
 
 
 
-  arrayA(1,2) = 0.92
+  ! arrayA(1,2) = 0.92
 
   call vagones(A, 5, v, arrayB, 320, arrayA)
 
@@ -110,7 +110,7 @@ program main
   !   arrayA(i+1, 1) = t
   !   arrayA(i+1, 2) = -tarifas(j+1,1)/tarifas(j,2) + 1 - probabilidad(t, mu, sigma) !gauss(mu,sigma,t)!probabilidad(t, mu, sigma)
   !
-  !   ! print *, i, arrayA(i+1, 1), arrayA(i+1, 2)
+  !   ! !print *, i, arrayA(i+1, 1), arrayA(i+1, 2)
   !
   ! end do
   !
@@ -127,13 +127,13 @@ program main
 
 
 
-  ! print *, probabilidad(dble(0), dble(1), dble(2))
+  ! !print *, probabilidad(dble(0), dble(1), dble(2))
 
   ! call random_number(h)
-  ! print *, h
+  ! !print *, h
   !
   ! call random_number(h)
-  ! print *, h
+  ! !print *, h
 
   ! output data into a file
 
@@ -146,7 +146,7 @@ program main
 
 
 
-   open(1, file = 'vprob4.dat', status = 'new')
+   open(1, file = 'delta4.dat', status = 'new')
    do i=1,320
       write(1,*) arrayB(i,1), arrayB(i,2)
    end do
